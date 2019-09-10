@@ -3,6 +3,6 @@ Documentation for openVALIDATION.
 
 see branches:
 
-en -> english version
-de -> german version
+- en -> english version
+- de -> german version
 
