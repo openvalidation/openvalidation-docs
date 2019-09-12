@@ -1,8 +1,5 @@
 # openvalidation-docs
 Documentation for openVALIDATION.
 
-see branches:
-
-- en -> english version
-- de -> german version
-
+The ["en" branch](https://github.com/openvalidation/openvalidation-docs/tree/en) contains the English version.  
+The ["de" branch](https://github.com/openvalidation/openvalidation-docs/tree/de) contains the German version.
