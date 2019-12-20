@@ -1,0 +1,100 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: openVALIDATION
+  description: openVALIDATION Beispiele.
+paths:
+  /:
+   post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/person'
+            x-ov-rules:
+              culture: de
+              rule: |
+
+                  KOMMENTAR Das ist ein Kommentar
+              
+                  WENN das Eigenkapital des Person KLEINER 30000 € ist
+                  DANN darf der Kredit nicht vergeben werden
+
+                       das Alter des Antragstellers DARF NICHT KLEINER 18 sein
+
+                       der Vetrag MUSS unterschrieben sein
+
+                       der Wohnort der Person MUSS Deutschland sein
+                
+                  WENN das Alter des Bewerbers GRÖßER 70 ist
+                  ODER sein Wohnort ist NICHT Dortmund
+                  DANN Sie dürfen nicht älter als 70 sein und aus Dortmund kommen
+
+                       das Alter des Bewerbers DARF NICHT KLEINER 25 sein
+                   UND sein Beruf MUSS Berater sein
+
+                  WENN der Abschluss des Bewerbers NICHT Bachelor ist
+                  ODER seine Berufserfahrung WENIGER als 5 Jahre ist
+                  DANN Sie müssen einen Bachelor oder 5 Jahre Erfahrung haben
+
+                       der Abschluss des Bewerbers MUSS Bachelor sein
+                  ODER seine Berufserfahrung MUSS MINDESTENS 5 Jahre sein
+
+                  WENN der Wohnort der Person IST London
+                   UND der Name des Person ist GLEICH Mycroft Holmes
+                  ODER sein Name ist GLEICH Sherlock Holmes
+                  DANN die Person ist ein Genie
+
+                       das Alter des Bewerbers ist KLEINER 18
+                   ALS Minderjährig
+
+                  WENN Aktiva - Passiva NICHT 0 
+                  DANN die Bilanz muss immer ausgeglichen sein
+
+                  WENN das Eigenkapital / Bilanzsumme UNGLEICH Eigenkapitalquote
+                  DANN die Bilanz enthält Fehler 
+
+                       die Berufserfahrung von Alter - 18 Jahren DARF NICHT GERINGER sein als 10 
+
+                       20
+                   ALS Berufseinstieg
+
+                       Alter - Berufseinstieg
+                   ALS Berufserfahrung
+
+                       Berufserfahrung * 12
+                   ALS Berufserfahrung in Monaten
+
+                   KOMMENTAR Mehrzeilige Kommentare
+                             sind auch möglich
+
+      responses:
+        '200':
+          description: success
+components:
+  schemas:
+    person:
+      type: object
+      properties:
+        name:
+          type: string
+        alter:
+          type: number
+        wohnort:
+          type: string
+        beruf:
+          type: string
+        eigenkapital:
+          type: integer   
+        unterschrieben:
+          type: boolean   
+        abschluss:
+          type: string
+        aktiva:
+          type: number
+        passiva:
+          type: number
+        bilanzsumme:
+          type: number
+        eigenkapitalquote:
+          type: number

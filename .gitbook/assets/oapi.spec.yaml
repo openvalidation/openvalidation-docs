@@ -1,0 +1,33 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: openVALIDATION
+  description: openVALIDATION Beispiele.
+paths:
+  /:
+   post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/person'
+            x-ov-rules:
+              culture: en
+              rule: |
+
+                  COMMENT This is a comment, Miss Honey
+              
+                  IF the persons equity is LESS THAN 30000 €
+                  THEN a loan could not be granted
+                  
+                  
+     responses:
+        '200':
+          description: success
+components:
+  schemas:
+    person:
+      type: object
+      properties:
+        equity:
+          type: integer   
