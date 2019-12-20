@@ -330,7 +330,7 @@ java -jar openvalidation.jar \
 
 ### Params
 
-With the help of the option **Params \(-p\)** the output can be changed. This can be used to perform imports into the code.
+The **Params \(-p\)** allows you to customize the generated code. Several parameters are entered in the format name=value, separated by semicolons.
 
 {% tabs %}
 {% tab title="Windows" %}
@@ -339,7 +339,9 @@ java -jar openvalidation.jar ^
      -r "IF the Message EQUALS hello THEN Hello World" ^
      -s "{Message : \"Text\"}" ^
      -c en ^
-     -p
+     -p model_type=io.openvalidation.Data;^
+        generated_class_namespace=io.openvalidation.rules;^
+        generated_class_name=MyRuleSet
 ```
 {% endtab %}
 
@@ -349,10 +351,21 @@ java -jar openvalidation.jar \
      -r "IF the Message EQUALS hallo THEN Hello World" \
      -s "{Message : \"Text\"}" \
      -c en \
-     -p
+     -p model_type=io.openvalidation.Data;\
+        generated_class_namespace=io.openvalidation.rules;\
+        generated_class_name=MyRuleSet
 ```
 {% endtab %}
 {% endtabs %}
+
+**model\_type** \(default=empty\)   
+is a complete\(package + classname\) name of the external model type. This specification is used to declare the model within the generated code.
+
+**generated\_class\_namespace** \(default=io.openvalidation.rules\)   
+is the name of the package of the generated classes. Both the framework and the implementation \(the actual rule set\) are assigned this package name.
+
+**generated\_class\_name** \(default=HUMLValidator\)   
+is the name of the generated class that contains the actual implementation of the rule set.
 
 ### No Banner
 
