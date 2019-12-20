@@ -6,9 +6,9 @@ You need Java version 8 or higher. Here you can download the corresponding [JRE 
 
 ### 1. Installation
 
-You need **openvalidation.jar** to generate code. **openvalidation.jar** is a simple Java command line interface. You can download the **openvalidation.jar** [here](http://13.93.15.207/openvalidation.jar):
+You need **openvalidation.jar** to generate code. **openvalidation.jar** is a simple Java command line interface. You can download the **openvalidation.jar** here:
 
-[![](.gitbook/assets/button1%20%285%29.PNG) ](http://download.openvalidation.io/openvalidation.jar)
+[![](.gitbook/assets/button1%20%285%29.PNG)](https://downloadarchive.blob.core.windows.net/openvalidation-generator/openvalidation.jar) 
 
 {% tabs %}
 {% tab title="Windows" %}
@@ -38,14 +38,14 @@ curl http://central.maven.org/maven2/openvalidation.jar
 
 Ok, now you are ready to start and can program your first validation rule in openVALIDATION. Create a file called _rules.ov_ and add the following content:
 
-{% code-tabs %}
-{% code-tabs-item title="rules.ov" %}
+{% code title="rules.ov" %}
 ```coffeescript
   IF the message IS Hello
 THEN hello openVALIDATION!
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
+
+_This rule is formatted so that it best illustrates the keywords and syntax of the openVALIDATION language. You could also just write `If the message is Hello then hello openVALIDATION!` and it would work just the same._
 
 In addition to the actual rule, you also need a schema. The schema defines the data structure of the data set to be validated. You can use a simple JSON object from which a JSON schema is automatically derived. Our schema consists only of a text field called "Message".
 
@@ -92,6 +92,7 @@ java -jar openvalidation.jar /
 
 Congratulations! You have just created your first validation rule in JavaScript. This can be found in the file _myRules.js_. This is the result:
 
+{% code title="" %}
 ```javascript
 ...
 
@@ -104,6 +105,7 @@ huml.appendRule("",
 
 ...
 ```
+{% endcode %}
 
 
 
@@ -111,8 +113,7 @@ huml.appendRule("",
 
 Now we'd like to see if our rule works. We create a file called _test.html_ and add the following code:
 
-{% code-tabs %}
-{% code-tabs-item title="test.html" %}
+{% code title="test.html" %}
 ```markup
 <html>
   <body>
@@ -141,8 +142,7 @@ Now we'd like to see if our rule works. We create a file called _test.html_ and 
   </body>
 </html>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 We call the **test.html** in the browser and type "_Hello_" into the input field:
 
@@ -152,11 +152,11 @@ As expected, when entering the value "_Hello_", our error message appears.
 
 
 
-### 5. NoCode Development
+### 5. No-Code Development
 
 You can now extend the rules by filling the file _rules.ov_ with additional rules and then doing the generation process again using openVALIDATION CLI. Just follow steps 2 to 4.
 
-The nice thing about it is that the file _rules.ov_ can now be edited by a domain expert without having to be familiar with the technology! As soon as he has changed the rules, openVALIDATION can automatically generate program code from them. This is what we call **NoCode Development**.
+The nice thing about it is that the file _rules.ov_ can now be edited by a domain expert without having to be familiar with the technology! As soon as he has changed the rules, openVALIDATION can automatically generate program code from them. This is what we call **No-Code Development**.
 
 If you would like to try out another detailed implementation example, then have a look at the [Integration ](openvalidation-integration.md)section.
 

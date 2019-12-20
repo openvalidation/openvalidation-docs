@@ -7,7 +7,7 @@ A rule is the most important construct in the grammar of openVALIDATION. They co
 THEN you must be at least 18 years old
 ```
 
-The keywords must be written in capital letters so that they are clearly recognized as such. In the future, capitalization will be optional. 
+_We write keywords in capital letters here, so that they are clearly recognized as such, but in fact openVALIDATION keywords are case-insensitive and you can also write out rules just like you would do it in ordinary text._ 
 
 | KEY WORD | TYPE | Description |
 | :--- | :--- | :--- |

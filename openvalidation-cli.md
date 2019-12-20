@@ -10,7 +10,7 @@ To use **openValidation** you need Java version 8 or higher. The corresponding [
 
 A command line interface \(CLI\) is a means of interacting with **openValidation.jar** where the user passes input to the program in the form of successive text lines \(command lines\).
 
-The **openValidation.jar** is a simple Java Command Line interface which can be downloaded [here](http://13.93.15.207/openvalidation.jar).
+The **openValidation.jar** is a simple Java Command Line interface which can be downloaded [here](https://downloadarchive.blob.core.windows.net/openvalidation-generator/openvalidation.jar).
 
  
 
@@ -220,6 +220,7 @@ The following programming languages are currently supported:
 | Java | `-l java` |
 | C\# | `-l csharp` |
 | JavaScript | `-l javascript` |
+| Python | `-l python` |
 
 In addition, **all available programming languages** can be output using the **--al \(-a\)** option. This option can also be used without entering other options or **mandatory** options.
 

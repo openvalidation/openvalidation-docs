@@ -17,7 +17,7 @@ NodeJS \(incl. npm\) from Version       [8.5](https://nodejs.org/en/download/)
 Browserify                                              [LATEST](http://browserify.org/#install)  
 Postman                                                 [LATEST](https://www.getpostman.com/downloads/)
 
-ov-openapi-generator-cli.jar               [![](../.gitbook/assets/button2%20%283%29.PNG) __](http://download.openvalidation.io/ov-openapi-generator-cli.jar)  
+ov-openapi-generator-cli.jar               [![](../.gitbook/assets/button2%20%283%29.PNG)\_\_](https://downloadarchive.blob.core.windows.net/openvalidation-openapi-generator/ov-openapi-generator-cli.jar) __  
 
 
 
@@ -71,8 +71,7 @@ atom . oapi.spec.yaml
 
 Now we add the following content to our specification:
 
-{% code-tabs %}
-{% code-tabs-item title="oapi.spec.yaml" %}
+{% code title="oapi.spec.yaml" %}
 ```yaml
 openapi: "3.0.0"
 info:
@@ -103,8 +102,7 @@ components:
           type: string
 
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Our service contract defines a **REST service** with a **POST operation**. This service operation accepts a complex data structure defined by the applicant **schema**. The schema itself consists of only 3 attributes: **name**, **age** and **location**.
 
@@ -114,8 +112,7 @@ Our service contract defines a **REST service** with a **POST operation**. This 
 
 Now we would like to give our Service Contract a certain validation rule. Let's say that the applicant's location must always be Dortmund. We simply add a new definition called `x-ov-rule` directly after the reference to the schema \(line 14\). This is what our finished Service Contract looks like:
 
-{% code-tabs %}
-{% code-tabs-item title="oapi.spec.yaml" %}
+{% code title="oapi.spec.yaml" %}
 ```yaml
 openapi: "3.0.0"
 info:
@@ -149,8 +146,7 @@ components:
         location:
           type: string
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Now we are ready to go and can generate the actual REST service.
 
@@ -274,8 +270,7 @@ browserify src/index.js --standalone Bundle -o clientproxy.js
 
 The call creates a JavaScript file called **clientproxy.js**, which we can use directly in the browser. Now we just have to create our demo HTML page. Therefore we create a file called **test.html** and add the following content:
 
-{% code-tabs %}
-{% code-tabs-item title="test.html" %}
+{% code title="test.html" %}
 ```markup
 <html>
   <body>
@@ -311,8 +306,7 @@ The call creates a JavaScript file called **clientproxy.js**, which we can use d
 </html>
 
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Now we make sure that the REST service is already running. If it is not, we restart the service as described in [step 3](openapi-tutorial.md#3-generieren-des-service-stubs-als-java-spring-boot). We also open the HTML page and enter **"Berlin"** in the input field. As expected, the error message _"the **place** of the applicant **MUST** be **Dortmund**" appears_. The exciting thing about this is that this error message is generated on the client-side before sending the request to the server. We can check this by looking at the tab **Network** in DeveloperTools of Chrome:
 

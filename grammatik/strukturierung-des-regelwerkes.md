@@ -75,17 +75,14 @@ The keyword `AS` and the name should be separated from the actual value of the v
 
 It is possible to split the entire set of rules into several files. For example, you can store the variables in a separate file and add external files using the keyword `IMPORT`:
 
-{% code-tabs %}
-{% code-tabs-item title="variables.ov" %}
+{% code title="variables.ov" %}
 ```coffeescript
     the age of the applicant is LESS than 18 years old
  AS underage
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="rules.ov" %}
+{% code title="rules.ov" %}
 ```coffeescript
 IMPORT ./variables.ov
 
@@ -93,6 +90,5 @@ IMPORT ./variables.ov
  AND his place of residence is NOT Dortmund
 THEN You must be at least 18 years old and come from Dortmund.
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 

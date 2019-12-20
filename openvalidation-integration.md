@@ -2,7 +2,7 @@
 
 ![](.gitbook/assets/image%20%285%29.png)
 
-openVALIDATION is a multilingual cross compiler. This compiler can translate one of the natural languages such as German or English into one of the programming languages such as Java, C\# or JavaScript. Logically, openVALIDATION does not understand the full range of a natural language, but the domain of validation rules. It is important to understand that program code is generated at the end of a compilation process. The developer can integrate this code into his application at the appropriate point. The generated code consists of two components:
+openVALIDATION is a multilingual cross compiler. This compiler can translate one of the natural languages such as German or English into one of the programming languages such as Java, C\#, JavaScript or Python. Logically, openVALIDATION does not understand the full range of a natural language, but the domain of validation rules. It is important to understand that program code is generated at the end of a compilation process. The developer can integrate this code into his application at the appropriate point. The generated code consists of two components:
 
 * Implementation of the actual validation rules 
 * And the generic validation framework 
@@ -17,7 +17,7 @@ Java Version                                          [1.8](https://www.oracle.c
 NodeJS \(inkl. npm\) from version       [8.5](https://nodejs.org/en/download/)  
 Postman                                                 [LATEST](https://www.getpostman.com/downloads/)
 
-[![](.gitbook/assets/button1%20%285%29.PNG) ](http://download.openvalidation.io/openvalidation.jar)
+[![](.gitbook/assets/button1%20%285%29.PNG) ](https://downloadarchive.blob.core.windows.net/openvalidation-generator/openvalidation.jar)
 
 ### 1. Creating a REST Service
 
@@ -175,9 +175,9 @@ Next, we generate the corresponding program code based on our rule and the corre
 java -jar openvalidation.jar ^
      -r   "IF the name IS Hello THEN Hello openVALIDATION!" ^
      -s   "{name:'String'}" ^
-     -c   "en" ^
-     -o   C:\tmp\nodeservice\expressVALIDATION.js ^
-     -l   node
+     -o   "C:\tmp\nodeservice\expressVALIDATION.js" ^
+     -l   node ^
+     -c   en
 ```
 {% endtab %}
 
@@ -185,9 +185,10 @@ java -jar openvalidation.jar ^
 ```bash
 java -jar openvalidation.jar \
      -r   "IF the Name IS Hallo THEN Hallo openVALIDATION!" \
-     -s   "{Name:'String'}" \
-     -o   C:\tmp\nodeservice\expressVALIDATION.js \
-     -l   node
+     -s   "{name:'String'}" \
+     -o   "C:\tmp\nodeservice\expressVALIDATION.js" \
+     -l   node \
+     -c   en
 ```
 {% endtab %}
 {% endtabs %}
@@ -241,14 +242,14 @@ We start Postman and create the corresponding POST request:
 {% tabs %}
 {% tab title="YAML" %}
 ```yaml
-Name : Hello
+name : Hello
 ```
 {% endtab %}
 
 {% tab title="JSON" %}
 ```javascript
 {
-	"Name" : "Hello"
+	"name" : "Hello"
 }
 ```
 {% endtab %}
@@ -256,41 +257,41 @@ Name : Hello
 
 And this is how the request and the corresponding response look like in Postman:
 
-![](.gitbook/assets/postman.PNG)
+![](.gitbook/assets/postman_example.png)
 
-If we set the value of the `Name`attribute to "**Hallo**", the corresponding error message is displayed in the response as required. If we change the value, the error message no longer appears. Congratulations, you have just implemented your first validation rule!
+If we set the value of the `Name`attribute to "**Hello**", the corresponding error message is displayed in the response as required. If we change the value, the error message no longer appears. Congratulations, you have just implemented your first validation rule!
 
 
 
 ## Separate the creation of validation rules from the development of the software itself
 
-The greatest added value of openVALIDATION results from the fact that the creation of validation rules is left to those who have the relevant domain expertise. These are usually the domain experts or the experts. The point is to completely isolate the creation of validation rules from the technical context so that the experts do not have to take on any technical hurdles.
+The greatest added value of openVALIDATION results from the fact that the creation of validation rules is left to those who have the relevant domain expertise. These are usually the domain experts. The point is to completely isolate the creation of validation rules from the technical context so that the experts do not have to take on any technical hurdles.
 
 Let's look again at the process by which we generated our validation rule via the CLI. We passed the rule directly to the parameter `-r` as text:
 
 ```bash
 java -jar openvalidation.jar ^
      -r   "IF the Name IS Hello THEN Hello openVALIDATION!" ^
-     -s   "{Name:'String'}"
+     -s   "{name:'String'}" ^
+     -c   en
 ```
 
-into a separate file. In e.g. myDomainRules.ov
+Or into a separate file. In e.g. myDomainRules.ov
 
-{% code-tabs %}
-{% code-tabs-item title="myDomainRules.ov" %}
+{% code title="myDomainRules.ov" %}
 ```coffeescript
   IF the Name IS Hello 
 THEN Hello openVALIDATION!
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-you can now also pass this file as a parameter to the CLI:
+You can now also pass this file as a parameter to the CLI:
 
 ```bash
 java -jar openvalidation.jar ^     
      -r   myDomainRules.ov ^
-     -s   "{Name:'String'}"
+     -s   "{name:'String'}" ^
+     -c   en
 ```
 
 The advantage of this separation is that from now on, domain experts can focus completely on creating these rules without having to know or understand the technical context \(REST Service, Nodejs, Express etc.\). All they need to do is understand and edit the content of the MyDomainRules.ov file. You can also place the file on a network drive and integrate the CLI call e.g. into a build pipeline. The BuildPipeline could create an NPM package and deploy it to a package repository. The developer would then obtain ready-implemented rules like any other NPM package:

@@ -4,6 +4,7 @@
 
 Let us assume that our set of rules consists of the following two rules:
 
+{% code title="" %}
 ```coffeescript
 
   IF the age of the applicant is LESS than 18
@@ -17,6 +18,7 @@ THEN You must be at least 18 years old and have work experience
      of at least 5 years
 
 ```
+{% endcode %}
 
 In both rules the query appears whether the user is already 18 years old. If we have 10, 20 or even 100 rules in which this query is needed, it becomes clear that such duplications unnecessarily inflate the clarity and complexity of the entire set of rules. 
 
@@ -31,6 +33,7 @@ The variable has a variable indicator **AS**. Everything that precedes the `AS`i
 
 Now that we have swapped the condition into a variable, we can use it in the appropriate places in our rules. And this is how our whole set of rules looks like:
 
+{% code title="" %}
 ```coffeescript
 
      the age of the applicant is LESS than 18 years old
@@ -47,6 +50,7 @@ THEN You must be at least 18 years old and have work experience
      of at least 5 years
      
 ```
+{% endcode %}
 
 {% hint style="info" %}
 Remember to always define variables before you use them. This means that the definition of a variable always needs to be anywhere above every place it is used in.

@@ -6,7 +6,7 @@ Some of us have already been automating administrative processes for almost 20 y
 
 The experience of the last few years and our preference for OpenSource software has led us to develop openVALIDATION![](../.gitbook/assets/log-part.png). A technology that we would like to share with the world.
 
-We hope to find more contributors for the further development of openVALIDATION, in order to change the digital change lastingly!
+We hope to find more contributors for the further development of openVALIDATION, in order to have a lasting impact on digital change!
 
 [GitHub](http://github.io)
 
