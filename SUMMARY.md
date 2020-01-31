@@ -12,6 +12,7 @@
   * [Funktionen](grammatik/funktionen.md)
   * [Arithmetik](grammatik/arithmetic.md)
   * [Domainspezifische Operatoren](grammatik/domainspezifische-operatoren.md)
+  * [Listen](grammatik/listen.md)
   * [Strukturieren des Regelwerkes](grammatik/strukturierung-des-regelwerkes.md)
   * [Schlüsselwörter](grammatik/schluesselwoerter.md)
 * [Regeln integrieren](openvalidation-integration.md)
