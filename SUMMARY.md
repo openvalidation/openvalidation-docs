@@ -21,6 +21,13 @@
 * [Best practice](best-practices.md)
 * [Examples](examples.md)
 
+## contribution
+
+* [Contribution guide](contribution/contribution-guide/README.md)
+  * [Architecture](contribution/contribution-guide/architecture.md)
+  * [Project structure](contribution/contribution-guide/project-structure.md)
+* [For beginners](contribution/for-beginners.md)
+
 ## OpenAPI Support <a id="openapi"></a>
 
 * [OpenAPI Codegen](openapi/openapi-specification.md)

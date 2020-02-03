@@ -146,7 +146,7 @@ Now we'd like to see if our rule works. We create a file called _test.html_ and 
 
 We call the **test.html** in the browser and type "_Hello_" into the input field:
 
-![](.gitbook/assets/image%20%2820%29.png)
+![](.gitbook/assets/image%20%2822%29.png)
 
 As expected, when entering the value "_Hello_", our error message appears.
 
