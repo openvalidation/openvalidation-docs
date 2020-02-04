@@ -150,7 +150,7 @@ Hier ist ein Beispiel für eine mögliche Inkonsistenz. Das schema sieht folgend
 
 ```javascript
 {
-    name:""
+    name : ""
 }
 ```
 
