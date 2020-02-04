@@ -4,7 +4,7 @@ Damit das Erstellen von Validierungsregeln in openVALIDATION möglichst einfach 
 
 ## Einrichten von openVALIDATION
 
-![](.gitbook/assets/image%20%2853%29.png)
+![](.gitbook/assets/image%20%2855%29.png)
 
 Zielgruppe, die sich primär mit der Erstellung der Regeln befassen soll sind Fachleute wie:
 

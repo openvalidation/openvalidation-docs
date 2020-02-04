@@ -323,7 +323,7 @@ Jetzt vergewissern wir uns, dass der REST Service bereits läuft. Wenn nicht, st
 
 Wenn wir jetzt anstatt **"Berlin", "Dortmund"** eingeben, sehen wir, dass der Request an den Server gereicht wird und ein positiver Response mit dem HTTP Status Code 200 zurückkommt:
 
-![](../.gitbook/assets/image%20%2851%29.png)
+![](../.gitbook/assets/image%20%2853%29.png)
 
 Dieses Beispiel demonstriert die Möglichkeit der Generierung von Validierungsregeln, sowohl innerhalb eines Service Stub's als auch innerhalb des entsprechenden Client Proxies. Und das noch für unterschiedliche Technologie Stacks.  
 
