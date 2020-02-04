@@ -128,7 +128,7 @@ In the image you can see that e.g. a rule contains a condition and an error mess
 
 The complete AST model consists of many individual classes which together form a logical hierarchy. [ASTModel](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTModel.java)  is the aggregate root of this central domain model.
 
-![the package io.openvalidation.common.ast contains the AST model](../../.gitbook/assets/image%20%284%29.png)
+![the package io.openvalidation.common.ast contains the AST model](../../.gitbook/assets/image%20%2848%29.png)
 
 The AST tree can easily be extended. For this purpose, each element must be derived at least from the class [ASTItem](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTItem.java). Depending on the position of the extension within the structure, a corresponding base class must be used.
 
@@ -164,7 +164,7 @@ In dieser Regeln wird das Attribut age verwendet, allerdings enthält das Schema
 
 Solche und viele weitere Prüfungen finden in dem Verarbeitungsschritt "Validation" statt. Diese Prüfmechanismen sind modular implementiert und befinden sich im openvalidation-core Modul.
 
-![das Package io.openvalidation.core.validation enth&#xE4;lt die entsprechenden Validatoren](../../.gitbook/assets/image%20%2846%29.png)
+![das Package io.openvalidation.core.validation enth&#xE4;lt die entsprechenden Validatoren](../../.gitbook/assets/image%20%2851%29.png)
 
 Die ValidatorFactory erzeugt für jedes einzelne Element des AST's abhängig von dessen Typ eine neue Instanz des entsprechenden Validators. Somit kümmert sich jeder Validator um einen bestimmten Bereich des AST's. 
 
