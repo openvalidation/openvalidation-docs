@@ -6,7 +6,7 @@ description: Description of the basic architecture
 
 At this point the core functionality and the corresponding architecture of **openVALIDATION** is described. This description does not include the CLI or REST component. A natural language rule and the corresponding schema are expected as input parameters. Afterwards the processing starts, which can be separated into 5 subroutines \(preprocessor, schema converter, parser, validation, generator\). At the end of the compilation process program code is generated.
 
-![simplified view of the compilation process](../../.gitbook/assets/image%20%2831%29.png)
+![simplified view of the entire compilation process](../../.gitbook/assets/image%20%2831%29.png)
 
 The preprocessor prepares the natural language rule. At this point, for example, a translation or normalization of the keywords \(aliases\) takes place. The parser generates the Abstract Syntax Tree \(AST\). The AST is the logical structure of the grammar, which in our case represents the domain of the validation rules. The AST is then processed further with the help of the generator, so that valid program code is generated at the end of the entire processing procedure.
 
@@ -93,7 +93,7 @@ If you want to realize a deeper integration of openVALIDATION into other systems
 
 xxx
 
-![](../../.gitbook/assets/image%20%2812%29.png)
+![the specified schema is loaded into the DataSchema component](../../.gitbook/assets/image%20%2812%29.png)
 
 
 
@@ -114,7 +114,7 @@ xx
 
 xxx
 
-![](../../.gitbook/assets/image%20%2843%29.png)
+![the parser takes a normalized rule and creates an AST object](../../.gitbook/assets/image%20%2843%29.png)
 
 
 
@@ -156,15 +156,15 @@ xxx
 
 ### Code
 
-Am Ende des gesamten Kompiliervorgangs, abhängig von der Ausgabesprache entsteht Programmcode in Java, JavaScript, C\# oder in einer der unterstützten Programmiersprachen. Der Code Selbst wird dabei in 3 Kategorien unterteilt:
+At the end of the entire compilation process, depending on the output language, program code is generated in Java, JavaScript, C\# or in one of the supported programming languages. The code itself is divided into 3 categories:
 
-* Implementierung
+* Implementation
 * Framework
 * ValidatorFactory
 
-#### **Implementierung**
+#### **Implementation**
 
-Der Implementierungscode enthält die eigentlich Logik des jeweiligen Regelwerkes. Es ist der Teil des Codes, der aus einer natürlichen Sprache in die jeweilige Programmiersprache übersetzt wurde. Und so sieht der Code aus:
+The implementation code contains the actual program logic of the respective Rule Set. It is the part of the code that has been translated from a natural language into the respective programming language. And this is what the code looks like:
 
 ```javascript
 var HUMLValidator = function() {
@@ -184,20 +184,18 @@ var HUMLValidator = function() {
 }
 ```
 
-Das obere Beispiel zeit den generierten JavaScript Code. Der Code besteht aus einer Grundstruktur, die im Falle von JavaScript durch eine Funktion namens HUMLValidator\(default name\) dem eigentlichen Regelwerk, der durch huml.appendRule definiert wird und durch die funktion validate abgebildet wird. 
+The example above shows the generated JavaScript code. The code consists of a basic structure which, in the case of JavaScript, is mapped by a function called **HUMLValidator**\(default name\) to the actual rule set defined by **huml.appendRule** and by the function **validate**.
 
+#### The Framework
 
+The implementation uses its own framework called HUMLFramework. This framework contains all the necessary basic functions for comparing different values. There are 2 important reasons why the HUMLFramework is necessary:
 
-#### Das Framework
-
-Die Implementierung verwendet das eigene Framework namens HUMLFramework. Dieses Framework enthält alle notwendigen Basisfunktionen zum Vergleichen von verschiedenen Werten. Es gibt 2 wichtige Gründe für die Notwendigkeit des HUMLFrameworks:
-
-1. Der generierte Code verzichtet auf jegliche Abhängigkeiten zu den 3'rd Party libraries. Der Generierte Code bringt alles notwendige mit. Dadurch wird die Integration des generierten Codes enorm erleichtert.
-2. Das Framework dient als eine Art Normalisierungs Layer für die Programmiersprachübergreifende Codegenerierung. Der Aufbau der Regeln hinter huml.appendRule sieht in verschiedenen Programmiersprachen ähnlich aus. Dadurch kann man beim generieren des Codes in verschiedene Programmiersprachen Code Generation Templates wiederverwenden sieh [Generator](architecture.md#generator).
+1. The generated code does not have any dependencies to the 3'rd party libraries. The generated code includes everything necessary. This makes the integration of the generated code much easier.
+2. The framework serves as a kind of normalization layer for cross-language code generation. The structure of the rules behind **huml.appendRule** looks similar in different programming languages. This allows us to reuse code generation templates when generating code in different programming languages - see [Generator](architecture.md#generator).
 
 #### ValidatorFactory
 
-Es gibt die Möglichkeit mehrere Regelwerke gleichzeitig zu generieren. In diesem Fall gibt es mehrere Validatoren mit je einem eigenem Regelwerk. Mit Hilfe der ValidatorFactory kann man auf das spezifische Regelwerk mit Hilfe der eindeutigen ID zugreifen: 
+It is possible to generate several rule sets simultaneously. In this case there are several validators, each with its own rules. With the help of the **ValidatorFactory** you can access the specific rule set using the unique **ID**:
 
 ```javascript
 var openValidatorFactory = function(){
@@ -217,7 +215,7 @@ var openValidatorFactory = function(){
 }
 ```
 
-Und hier ist die Verwendung der ValidatorFactory:
+And here is how to use the ValidatorFactory:
 
 ```javascript
 //usage:
@@ -225,4 +223,10 @@ var factory = openValidatorFactory();
 validator = factory.create("Validator1");
 validator.validate({age:18})
 ```
+
+
+
+{% hint style="info" %}
+Code files can be generated automatically by setting the appropriate parameters. Furthermore, it is possible to create the entire code in one file each. Depending on the programming language, e.g. Java, inner classes will be generated.
+{% endhint %}
 
