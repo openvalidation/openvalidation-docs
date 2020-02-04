@@ -140,9 +140,45 @@ Parsing is primarily about extracting all relevant information from a continuous
 
 ### Validation
 
-xxx
+Nachdem der AST erfolgreich erzeugt wurde, muss dieser noch validiert werden bevor daraus im nächsten Schritt Programmcode mit Hilfe des Generators generiert wird. Dieser Validierungsschritt sorgt dafür, dass der AST Baum konsistent und valide ist. 
 
-![](../../.gitbook/assets/image%20%2828%29.png)
+![der Verarbeitungsschritt Validierung pr&#xFC;ft den AST und erzeugt logische Compilermeldungen](../../.gitbook/assets/image%20%2828%29.png)
+
+
+
+Hier ist ein Beispiel für eine mögliche Inkonsistenz. Unser schema sieht folgendermaßen aus:
+
+```javascript
+{
+    name:""
+}
+```
+
+und diese Regel möchten wir generieren:
+
+```javascript
+applicant's age should not be less than 18 years
+```
+
+In dieser Regeln wird das Attribut age verwendet, allerdings enthält das Schema lediglich nur das Attribut name. Das Attribut age kann bzw. darf nicht gefunden werden. Der openVALIDATION Compiler darf in diesem Fall keinen Programmcode generieren. An dieser Stelle muss eine entsprechende Fehlermeldung vom Compiler geworfen werden: wie z.B. "Die Regel muss mindesten ein Attribut aus dem Schema beinhalten." Damit so eine Fehlermeldung geworfen werden kann, muss der AST entsprechend geprüft werden. 
+
+Solche und viele weitere Prüfungen finden in dem Verarbeitungsschritt "Validation" statt. Diese Prüfmechanismen sind modular implementiert und befinden sich im openvalidation-core Modul.
+
+![das Package io.openvalidation.core.validation enth&#xE4;lt die entsprechenden Validatoren](../../.gitbook/assets/image%20%2846%29.png)
+
+Die ValidatorFactory erzeugt für jedes einzelne Element des AST's abhängig von dessen Typ eine neue Instanz des entsprechenden Validators. Somit kümmert sich jeder Validator um einen bestimmten Bereich des AST's. 
+
+Jeder einzelne Validator wird dabei von der Basisklasse ValidatorBase abgeleitet und muss dabei die geerbte Methode void validate\(\) überschreiben. Sollte eine inkonsistenz gefunden werden, wird sofort eine neue Exception vom Typ ASTValidationException geworfen. Das sorgt dafür, dass keine unnötigen Folgefehler erfasst werden.   
+
+{% hint style="warning" %}
+Es ist eine der größten Herausforderungen im Bau eines Compilers saubere und aussagekräftige Compilermeldung zu erzeugen. Diese Fehlermeldungen sollen dem Anwender helfen, seine Eingabe zu korrigieren. Es geht unter anderem darum, nicht zu viel und nicht zu wenig Fehlerinformationen zurückzugeben. Oft ist es so, dass der eigentliche Fehler 10 Verarbeitungsschritte zurückliegt und lediglich seine Auswirkungen gefunden wurde. 
+
+Das ExceptionHandling bzw. das generieren aussagekräftiger Compilerfehler in openVALIDATION befindet sich noch in einem noch sehr frühem Stadium. Es ist sehr wahrscheinlich, dass sich die Architektur an dieser Stelle nochmal ändern wird. 
+
+Verbesserungsvorschläge und weitere Diskussionen zu diesem Thema sind sind ausdrücklich erwünscht!
+{% endhint %}
+
+
 
 
 
