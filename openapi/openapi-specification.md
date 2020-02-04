@@ -84,7 +84,7 @@ paths:
 openVALIDATION bringt eine eigene OpenAPI Extension mit, die die entsprechenden Validierungsregeln für die jeweiligen Serviceoperationen definiert. Im eigenen OV-OpenAPI Generator wird diese Extension maschinell verarbeitet, sodass daraus  Programmcode mit den entsprechenden Validierungsregeln erzeugt wird. Dieser Code wir in den Standard-Generierungsprozess von OpenAPI Generator eingefügt. Am Ende entsteht z.B. ein Java Spring Service Stub mit fertig implementierten Validierungsregeln.   
 
 
-![Custom openVALIDATION-OpenAPI Generator erm&#xF6;glicht Generierung von Validierungsregeln.](../.gitbook/assets/image%20%2817%29.png)
+![Custom openVALIDATION-OpenAPI Generator erm&#xF6;glicht Generierung von Validierungsregeln.](../.gitbook/assets/image%20%2810%29.png)
 
 
 
