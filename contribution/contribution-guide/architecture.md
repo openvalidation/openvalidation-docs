@@ -171,9 +171,9 @@ Die ValidatorFactory erzeugt für jedes einzelne Element des AST's abhängig von
 Jeder einzelne Validator wird dabei von der Basisklasse ValidatorBase abgeleitet und muss dabei die geerbte Methode void validate\(\) überschreiben. Sollte eine inkonsistenz gefunden werden, wird sofort eine neue Exception vom Typ ASTValidationException geworfen. Das sorgt dafür, dass keine unnötigen Folgefehler erfasst werden.   
 
 {% hint style="warning" %}
-Es ist eine der größten Herausforderungen im Bau eines Compilers saubere und aussagekräftige Compilermeldung zu erzeugen. Diese Fehlermeldungen sollen dem Anwender helfen, seine Eingabe zu korrigieren. Es geht unter anderem darum, nicht zu viel und nicht zu wenig Fehlerinformationen zurückzugeben. Oft ist es so, dass der eigentliche Fehler 10 Verarbeitungsschritte zurückliegt und lediglich seine Auswirkungen gefunden wurde. 
+Es ist eine der größten Herausforderungen beim Entwickeln eines Compilers saubere und aussagekräftige Compilermeldungen zu erzeugen. Diese Fehlermeldungen sollen dem Anwender helfen, seine Eingabe zu korrigieren. Es geht unter anderem darum, nicht zu viel und nicht zu wenig Fehlerinformationen zurückzugeben. Oft ist es so, dass der eigentliche Fehler 10 Verarbeitungsschritte zurückliegt und lediglich seine Auswirkungen gefunden wurde. 
 
-Das ExceptionHandling bzw. das generieren aussagekräftiger Compilerfehler in openVALIDATION befindet sich noch in einem noch sehr frühem Stadium. Es ist sehr wahrscheinlich, dass sich die Architektur an dieser Stelle nochmal ändern wird. 
+Das ExceptionHandling bzw. das generieren aussagekräftiger Compilerfehler in openVALIDATION befindet sich noch in einem sehr frühem Stadium. Es ist sehr wahrscheinlich, dass sich die Architektur an dieser Stelle nochmal ändern wird. 
 
 Verbesserungsvorschläge und weitere Diskussionen zu diesem Thema sind sind ausdrücklich erwünscht!
 {% endhint %}
