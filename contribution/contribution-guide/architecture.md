@@ -146,7 +146,7 @@ Nachdem der AST erfolgreich erzeugt wurde, muss dieser noch validiert werden bev
 
 
 
-Hier ist ein Beispiel für eine mögliche Inkonsistenz. Unser schema sieht folgendermaßen aus:
+Hier ist ein Beispiel für eine mögliche Inkonsistenz. Das schema sieht folgendermaßen aus:
 
 ```javascript
 {
