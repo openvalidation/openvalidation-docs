@@ -156,7 +156,73 @@ xxx
 
 ### Code
 
-Am Ende des gesamten Kompiliervorgangs wird Programmcode erstellt. Abhängig von der Ausgabesprache kommt entsteht am Ende ein Code in Java, JavaScript, C\# oder in einer der verfügbaren Programmiersprachen. Der Code Selbst wird dabei in 3 Bereich unterteilt:
+Am Ende des gesamten Kompiliervorgangs, abhängig von der Ausgabesprache entsteht Programmcode in Java, JavaScript, C\# oder in einer der unterstützten Programmiersprachen. Der Code Selbst wird dabei in 3 Kategorien unterteilt:
 
-1. Implementierung
+* Implementierung
+* Framework
+* ValidatorFactory
+
+#### **Implementierung**
+
+Der Implementierungscode enthält die eigentlich Logik des jeweiligen Regelwerkes. Es ist der Teil des Codes, der aus einer natürlichen Sprache in die jeweilige Programmiersprache übersetzt wurde. Und so sieht der Code aus:
+
+```javascript
+var HUMLValidator = function() {
+    var huml = new HUMLFramework();
+
+    //rule: applicant's age should not be less than 18 years
+    huml.appendRule("",
+           ["age"],
+           "applicant&#x27;s age should not be less than 18 years",
+           function(model) { return huml.LESS_THAN(model.age, 18.0);},
+           false
+        );
+
+    this.validate = function(model){
+        return huml.validate(model);
+    }
+}
+```
+
+Das obere Beispiel zeit den generierten JavaScript Code. Der Code besteht aus einer Grundstruktur, die im Falle von JavaScript durch eine Funktion namens HUMLValidator\(default name\) dem eigentlichen Regelwerk, der durch huml.appendRule definiert wird und durch die funktion validate abgebildet wird. 
+
+
+
+#### Das Framework
+
+Die Implementierung verwendet das eigene Framework namens HUMLFramework. Dieses Framework enthält alle notwendigen Basisfunktionen zum Vergleichen von verschiedenen Werten. Es gibt 2 wichtige Gründe für die Notwendigkeit des HUMLFrameworks:
+
+1. Der generierte Code verzichtet auf jegliche Abhängigkeiten zu den 3'rd Party libraries. Der Generierte Code bringt alles notwendige mit. Dadurch wird die Integration des generierten Codes enorm erleichtert.
+2. Das Framework dient als eine Art Normalisierungs Layer für die Programmiersprachübergreifende Codegenerierung. Der Aufbau der Regeln hinter huml.appendRule sieht in verschiedenen Programmiersprachen ähnlich aus. Dadurch kann man beim generieren des Codes in verschiedene Programmiersprachen Code Generation Templates wiederverwenden sieh [Generator](architecture.md#generator).
+
+#### ValidatorFactory
+
+Es gibt die Möglichkeit mehrere Regelwerke gleichzeitig zu generieren. In diesem Fall gibt es mehrere Validatoren mit je einem eigenem Regelwerk. Mit Hilfe der ValidatorFactory kann man auf das spezifische Regelwerk mit Hilfe der eindeutigen ID zugreifen: 
+
+```javascript
+var openValidatorFactory = function(){
+    var _validators = {
+            Validator1 : new Validator1(),
+            Validator2 : new Validator2(),
+            Validator3 : new Validator3(),            
+    };
+
+    this.create = function(validatorID){
+        if (_validators != null){
+            return _validators[validatorID];
+        }
+
+        return null;
+    }
+}
+```
+
+Und hier ist die Verwendung der ValidatorFactory:
+
+```javascript
+//usage:
+var factory = openValidatorFactory();
+validator = factory.create("Validator1");
+validator.validate({age:18})
+```
 
