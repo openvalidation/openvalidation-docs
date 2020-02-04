@@ -1,3 +1,7 @@
+---
+description: How to contribute to openVALIDATION?
+---
+
 # For beginners
 
 ### If you want to join openVALIDATION, then openVALIDATION wants you too!

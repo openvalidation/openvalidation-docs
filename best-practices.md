@@ -2,7 +2,7 @@
 
 In order for the creation of validation rules in openVALIDATION to be as simple and efficient as possible, a lot should be considered.
 
-![](.gitbook/assets/image%20%2823%29.png)
+![](.gitbook/assets/image%20%2836%29.png)
 
 ## Setting up openVALIDATION
 

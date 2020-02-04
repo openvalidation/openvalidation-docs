@@ -8,7 +8,7 @@ To demonstrate the functionality of the OV-OpenAPI code generator, we should imp
 4. Then test it with Postman. 
 5. And if we get bored in the end, we create a JavaScript client from the same service contract, which will execute the validation rules on the client side before the data is sent to the service.  
 
-![](../.gitbook/assets/image%20%2824%29.png)
+![](../.gitbook/assets/image%20%2838%29.png)
 
 For this example certain knowledge like OpenAPI, NPM and basics of modern frontend development are required. Furthermore, the following technical requirements must be met:
 
@@ -190,7 +190,7 @@ java -jar target/openapi-spring-1.0.0.jar
 
 If everything worked out, the service is already running on port 8080 and can simply be called up in the browser at [http://localhost:8080/](http://localhost:8080/) :
 
-![](../.gitbook/assets/image%20%284%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
 {% hint style="info" %}
 The openVALIDATION generator has the standard functionality of the original OpenAPI generator and just adds the abilty of processing the **x-ov-rules** extension. This processing includes the generation of validation rules and their integration into the respective framework, e.g. Spring Boot. Customization is implemented according to the official Customization Guide \([https://openapi-generator.tech/docs/customization.html](https://openapi-generator.tech/docs/customization.html)\) of the OpenAPI Generator.
