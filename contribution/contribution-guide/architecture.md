@@ -91,9 +91,53 @@ If you want to realize a deeper integration of openVALIDATION into other systems
 
 ### Schema converter
 
-xxx
+openVALIDATION needs the schema to parse the natural language rule. All attributes of the schema are therefore loaded into the [DataSchema](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/data/DataSchema.java) component. To do this, the schema must be read and converted into the appropriate format. Since the schema itself can be specified in various formats, such as JSON Schema or JSON Object and later also in yaml or xsd, there is a [SchemaConverterFactory](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/converter/SchemaConverterFactory.java). It provides the corresponding implementation of a specific converter depending on the type of schema.
 
 ![the specified schema is loaded into the DataSchema component](../../.gitbook/assets/image%20%2812%29.png)
+
+Each converter must implement the [ISchemaConverter](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/converter/ISchemaConverter.java) interface and the DataSchema **convert\(\)** method. The task of the converter is to run through the hierarchy of the schema and convert each attribute with all relevant meta informations, such as name, type, path/full name, and so on, into a flat structure of the DataSchema.
+
+Here is an example. The following schema is given:
+
+```javascript
+{
+    age:0,
+    address : {
+        city : ""
+    }
+}
+```
+
+After the conversion the following information is in the DataSchema \(pseudo YAML format\):
+
+```javascript
+_properties:
+    DataProperty:
+        name : "age"
+        path : ""
+        fullName : "age"
+        type : "Decimal"
+    DataProperty:
+        name : "address"
+        path : ""
+        fullName : "address"
+        type : "Object"
+    DataProperty:
+        name : "city"
+        path : "address"
+        fullName : "address.city"
+        type : "String"                
+
+        
+```
+
+Thanks to this metadata, all relevant information can be extracted from a natural language rule. Among other things, this construct allows recursive name resolution of schema attributes. For example, you could directly use the attribute city without specifying the full name address.city like in a formal programming language. If city occurs more than once in schema, it will be validated later and the user will get a compiler message that he has to use the full name because of ambiguity.
+
+**DataSchema**
+
+The DataSchema component stores not only the schema information but also the [variables](../../grammatik/variablen.md) and [semantic operators](../../grammatik/domainspezifische-operatoren.md). However, this information is added at a later time after the first parsing routine.
+
+By keeping the type information available during parsing, especially the operands of a condition can be determined and extracted. For example, if you know that the left operand is an attribute from the schema of type decimal and the right operand simply contains text, you can try to extract a numeric value from this text. If no numeric value is found, you can then throw a relatively unique compiler message.
 
 
 
