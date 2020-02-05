@@ -6,7 +6,7 @@ description: Description of the basic architecture
 
 At this point the core functionality and the corresponding architecture of **openVALIDATION** is described. This description does not include the CLI or REST component. A natural language rule and the corresponding schema are expected as input parameters. Afterwards the processing starts, which can be separated into 5 subroutines \(preprocessor, schema converter, parser, validation, generator\). At the end of the compilation process program code is generated.
 
-![simplified view of the entire compilation process](../../.gitbook/assets/image%20%2831%29.png)
+![simplified view of the entire compilation process](../../.gitbook/assets/image%20%2832%29.png)
 
 The preprocessor prepares the natural language rule. At this point, for example, a translation or normalization of the keywords \(aliases\) takes place. The parser generates the Abstract Syntax Tree \(AST\). The AST is the logical structure of the grammar, which in our case represents the domain of the validation rules. The AST is then processed further with the help of the generator, so that valid program code is generated at the end of the entire processing procedure.
 
@@ -114,7 +114,7 @@ xx
 
 xxx
 
-![the parser takes a normalized rule and creates an AST object](../../.gitbook/assets/image%20%2843%29.png)
+![the parser takes a normalized rule and creates an AST object](../../.gitbook/assets/image%20%2844%29.png)
 
 
 
@@ -122,13 +122,13 @@ xxx
 
 The Abstract Syntax Tree is the central component of the openVALIDATION compiler. The AST is nothing else than the domain model of openVALIDATION. This domain model represents a logical structure of a validation rule.
 
-![Schematic representation of an AST object and the rule contained inside it](../../.gitbook/assets/image%20%2822%29.png)
+![Schematic representation of an AST object and the rule contained inside it](../../.gitbook/assets/image%20%2823%29.png)
 
 In the image you can see that e.g. a rule contains a condition and an error message. The condition has a left operand, a right operand and a comparison operator. This is a very simple example, which only demonstrates the schematic and logical structure of AST. Usually, the AST is much more complex. For example, a rule can contain many conditions, which are linked with a logical operator AND or OR. There are also nested conditions or condition groups. There are variables, which can contain another conditions, and so on.
 
 The complete AST model consists of many individual classes which together form a logical hierarchy. [ASTModel](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTModel.java)  is the aggregate root of this central domain model.
 
-![the package io.openvalidation.common.ast contains the AST model](../../.gitbook/assets/image%20%2848%29.png)
+![the package io.openvalidation.common.ast contains the AST model](../../.gitbook/assets/image%20%2850%29.png)
 
 The AST tree can easily be extended. For this purpose, each element must be derived at least from the class [ASTItem](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTItem.java). Depending on the position of the extension within the structure, a corresponding base class must be used.
 
@@ -140,13 +140,13 @@ Parsing is primarily about extracting all relevant information from a continuous
 
 ### Validation
 
-Nachdem der AST erfolgreich erzeugt wurde, muss dieser noch validiert werden bevor daraus im nächsten Schritt Programmcode mit Hilfe des Generators generiert wird. Dieser Validierungsschritt sorgt dafür, dass der AST Baum konsistent und valide ist. 
+After the AST has been successfully generated, it has to be validated before program code is generated in the next step with the help of the generator. This validation step ensures that the AST tree is consistent and valid.
 
-![der Verarbeitungsschritt Validierung pr&#xFC;ft den AST und erzeugt logische Compilermeldungen](../../.gitbook/assets/image%20%2828%29.png)
+![the processing step Validation checks the AST and generates corresponding compiler messages](../../.gitbook/assets/image%20%2829%29.png)
 
 
 
-Hier ist ein Beispiel für eine mögliche Inkonsistenz. Das schema sieht folgendermaßen aus:
+Here is an example of a possible inconsistency. The schema looks like this:
 
 ```javascript
 {
@@ -154,28 +154,28 @@ Hier ist ein Beispiel für eine mögliche Inkonsistenz. Das schema sieht folgend
 }
 ```
 
-und diese Regel möchten wir generieren:
+and here is the rule:
 
 ```javascript
 applicant's age should not be less than 18 years
 ```
 
-In dieser Regeln wird das Attribut age verwendet, allerdings enthält das Schema lediglich nur das Attribut name. Das Attribut age kann bzw. darf nicht gefunden werden. Der openVALIDATION Compiler darf in diesem Fall keinen Programmcode generieren. An dieser Stelle muss eine entsprechende Fehlermeldung vom Compiler geworfen werden: wie z.B. "Die Regel muss mindesten ein Attribut aus dem Schema beinhalten." Damit so eine Fehlermeldung geworfen werden kann, muss der AST entsprechend geprüft werden. 
+The **age** attribute is used in these rules, but the schema only contains the attribute **name**. The **age** attribute cannot or must not be found. In this case openVALIDATION Compiler must not generate any program code. At this point, the compiler must throw a corresponding error message: e.g. **"The rule must contain at least one attribute from the schema"** or something like that. In order for such an error message to be thrown, the AST must be checked accordingly.
 
-Solche und viele weitere Prüfungen finden in dem Verarbeitungsschritt "Validation" statt. Diese Prüfmechanismen sind modular implementiert und befinden sich im openvalidation-core Modul.
+Such and many other checks are performed in the processing step "Validation". These check mechanisms are implemented in a modular way and are located in the [openvalidation-core](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-core) module.
 
-![das Package io.openvalidation.core.validation enth&#xE4;lt die entsprechenden Validatoren](../../.gitbook/assets/image%20%2851%29.png)
+![the package io.openvalidation.core.validation contains the corresponding validators](../../.gitbook/assets/image%20%2854%29.png)
 
-Die ValidatorFactory erzeugt für jedes einzelne Element des AST's abhängig von dessen Typ eine neue Instanz des entsprechenden Validators. Somit kümmert sich jeder Validator um einen bestimmten Bereich des AST's. 
+The ValidatorFactory creates a new instance of the corresponding validator for each individual element of the AST depending on its type. Thus, each validator takes care of a certain area of the AST.
 
-Jeder einzelne Validator wird dabei von der Basisklasse ValidatorBase abgeleitet und muss dabei die geerbte Methode void validate\(\) überschreiben. Sollte eine inkonsistenz gefunden werden, wird sofort eine neue Exception vom Typ ASTValidationException geworfen. Das sorgt dafür, dass keine unnötigen Folgefehler erfasst werden.   
+Each single validator is derived from the base class **ValidatorBase** and must overwrite the inherited method **void validate\(\)**. If an inconsistency is found, a new exception of type **ASTValidationException** is thrown immediately. This ensures that no unnecessary subsequent errors are caught.
 
 {% hint style="warning" %}
-Es ist eine der größten Herausforderungen beim Entwickeln eines Compilers saubere und aussagekräftige Compilermeldungen zu erzeugen. Diese Fehlermeldungen sollen dem Anwender helfen, seine Eingabe zu korrigieren. Es geht unter anderem darum, nicht zu viel und nicht zu wenig Fehlerinformationen zurückzugeben. Oft ist es so, dass der eigentliche Fehler 10 Verarbeitungsschritte zurückliegt und lediglich seine Auswirkungen gefunden wurde. 
+It is one of the biggest challenges in developing a compiler to produce clean and meaningful compiler messages. These error messages should help the user to correct his input. Among other things, it is important not to return too much and not too few error information. It is often the case that the actual error occurred 10 processing steps back and only its site effects were found.
 
-Das ExceptionHandling bzw. das generieren aussagekräftiger Compilerfehler in openVALIDATION befindet sich noch in einem sehr frühem Stadium. Es ist sehr wahrscheinlich, dass sich die Architektur an dieser Stelle nochmal ändern wird. 
+The exception handling or the generation of meaningful compiler errors in openVALIDATION is still in a very early stage. It is very likely that the architecture will change again at this point.
 
-Verbesserungsvorschläge und weitere Diskussionen zu diesem Thema sind sind ausdrücklich erwünscht!
+Suggestions for improvement and further discussions on this topic are explicitly welcome!
 {% endhint %}
 
 
@@ -184,9 +184,35 @@ Verbesserungsvorschläge und weitere Diskussionen zu diesem Thema sind sind ausd
 
 ### Generator
 
-xxx
+This is the final processing step. At this point program code is generated from the AST tree. To be more precise, OpenValidationResult is generated, which contains compiler error messages as well as various metadata in addition to the actual code.
 
-![](../../.gitbook/assets/image.png)
+The core of the code generation are the generator templates and the framework [Handlebars](https://handlebarsjs.com/)  or their [java implementation](https://github.com/jknack/handlebars.java).
+
+![Program code is generated from the AST tree using Handlebars Templates](../../.gitbook/assets/image.png)
+
+openVALIDATION is a multilingual cross compiler. It means that both input and output can be done in different languages. Therefore there are several generator templates for different programming languages. Here is the list of the currently supported languages, but not all of them are implemented yet:
+
+* Java
+* JavaScript/node
+* C\#
+* Python
+* Rust
+
+More are to follow.
+
+Everything that is necessary to generate is located in the module [openvalidation-generation](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-generation). The corresponding generator templates are located in the Resources folder:
+
+![](../../.gitbook/assets/image%20%2853%29.png)
+
+Each supported programming language has its own folder with the corresponding name. Generator templates for Javascript are located in the folder Javascript, for Java in Java, and so on. Cross-language templates are located in the folder common.
+
+The templates themselves are named by the type of AST element and are used accordingly during generation. There is also a fallback mechanism that checks whether a template with the corresponding name exists in the language-specific folder. If not, the template is loaded from the Common Folder. This fallback mechanism enables the consistent reuse of templates for different output languages. Thus, you need much less language-specific generator templates and can implement new programming languages with much less effort.
+
+This fallback was realized with an own helper called [tmpl](https://github.com/openvalidation/openvalidation/blob/b9dd7dfa627019063b3d3a8263d1ede8114ba28f/openvalidation-generation/src/main/java/io/openvalidation/generation/CodeGenerator.java#L110).
+
+Besides the actual rules, the generator creates its own specific framework and another code artifact called ValidatorFactory. The framework and the factory exist for each output language. They later facilitate the integration of the generated code into other systems.
+
+Above all, the HUMLFramework or the corresponding framework.hbs is full of specific logic that requires special quality assurance. In order to be able to test it properly, the framework.hbs templates have been outsourced to separate projects within our own [openvalidation-framework-tests](https://github.com/openvalidation/openvalidation-framework-tests) repositories. There the respective implementations can be tested in their own technology stacks, each with its own unit tests. Afterwards one has to copy the corresponding code from the respective file HUMLFramework.xxx into the corresponding directory within the generator as framework.hbs. This is currently a manual step, which is required at this point. In the future, this should also be automated or simplified.
 
 
 
