@@ -107,7 +107,7 @@ openVALIDATION REST Service listening on port 3000...
 
 We can test our REST service by sending a GET request to [http://localhost:3000/](http://localhost:3000/) either in the browser or, for example, in Postman.
 
-![](.gitbook/assets/image%20%2825%29.png)
+![](.gitbook/assets/image%20%2826%29.png)
 
 The service runs and does what it's supposed to. Currently, our REST service only has a simple GET operation, which returns "Hello World! Now we would like to extend the service by another service operation, in which sent data should be validated. Therefore we stop the current service with `STRG+C`.
 
