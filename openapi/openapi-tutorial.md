@@ -8,7 +8,7 @@ To demonstrate the functionality of the OV-OpenAPI code generator, we should imp
 4. Then test it with Postman. 
 5. And if we get bored in the end, we create a JavaScript client from the same service contract, which will execute the validation rules on the client side before the data is sent to the service.  
 
-![](../.gitbook/assets/image%20%2839%29.png)
+![](../.gitbook/assets/image%20%2840%29.png)
 
 For this example certain knowledge like OpenAPI, NPM and basics of modern frontend development are required. Furthermore, the following technical requirements must be met:
 
