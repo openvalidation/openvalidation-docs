@@ -149,7 +149,7 @@ These are many small routines that prepare the original text. This processing lo
 
 ![The internal design of the preprocessor](../../.gitbook/assets/image%20%2810%29.png)
 
-Every single step of the whole preprocessor routine is implemented in a separate module. Each of these modules must be derived from the abstract base class PreProcessorStepBase. Afterwards the method String process\(String rule\) must be overwritten and provided with the respective logic. Currently, the following modules can be found in the package io.openvalidation.core.preprocessing.steps:
+Every single step of the whole preprocessor routine is implemented in a separate module. Each of these modules must be derived from the abstract base class [PreProcessorStepBase](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-core/src/main/java/io/openvalidation/core/preprocessing/PreProcessorStepBase.java). Afterwards the method **String process\(String rule\)** must be overwritten and provided with the respective logic. Currently, the following modules can be found in the package [io.openvalidation.core.preprocessing.steps](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-core/src/main/java/io/openvalidation/core/preprocessing/steps):
 
 [PreProcessorAliasResolutionStep.java](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-core/src/main/java/io/openvalidation/core/preprocessing/steps/PreProcessorAliasResolutionStep.java)
 
