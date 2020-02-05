@@ -197,52 +197,52 @@ The resolution of the aliases depends on the Culture Code used. When using e.g. 
 
 ### Parser
 
-Das Parsen ist wahrscheinlich der bedeutendste und gleichzeitig auch der komplexeste Verarbeitungsschritt in openVALIDATION. Eines der Gründe für die besondere Komplexität ist die Flexibilität der Grammatik bzw. der Natürlichen Sprache. In formalen Programmiersprachen aber auch in den meisten DSL's und vor allem in den stark typisierten Objektorientierten Programmiersprachen hat jedes Wort, jedes Zeichen eine sehr genaue Bedeutung. Die Eingabe muss sehr genau erfolgen ansonsten gibt es sofort einen Compilerfehler. 
+Parsing is probably the most important and complex processing step in openVALIDATION. One of the reasons for the particular complexity is the flexibility of the grammar or Natural Language. In formal programming languages but also in most DSL's and especially in the strongly typed object-oriented programming languages every word, every character has a very precise meaning. The input must be very exact otherwise there is an immediate compiler error.
 
-Beim design der Grammatik von openVALIDATION war uns sehr wichtig, dass solche Restriktionen für die normalen Anwender\(Nicht-Entwickler\) oft hinderlich sind. Deshalb bietet openVALIDATION sehr viele Varianten, wie man eine Regel auf eine möglichst natürliche Weise ausdrücken kann. 
+While designing the grammar of openVALIDATION it was very important to us to avoid such restrictions as they make the understanding and usage for normal users \(**non-developers**\) difficult. Therefore openVALIDATION allows many variants of how to express a rule in a natural way without bothering the user with a compiler message at every little deviation.
 
 ```javascript
 if user's age is less than 18 years then underage persons are not admitted
 ```
 
-oder
+or
 
 ```javascript
 the applicant's age must not be less than 18 years
 ```
 
-Beide Regeln werden vom Compiler in folgenden Code übersetzt. Hier in Pseudo Code:
+Both rules are translated by the compiler into the following code. Here in pseudo code:
 
 ```javascript
 if (age < 18)
     throw Error("underage persons..." or in the 2nd case "the applicant's..")
 ```
 
-Der Compiler versucht erst einmal die Eingaben so zu akzeptieren wie es dem Benutzer am besten passt, um anschließend daraus den relevanten Teil zu extrahieren, ohne dabei den Benutzer dazu zu zwingen eine bestimmte Schreibweise einzuhalten. Dadurch ist die Lernkurve bei Newbies extrem Steil. Sie müssen lediglich ganz grob die Struktur einer Validierungsregel kennenlernen, ohne dabe auf jedes Zeichen oder jedes Keyword achten zu müssen.
+The compiler first tries to accept the input as it suits the user best, then extracts the relevant part without forcing the user to follow a certain notation. This makes the learning curve for Newbies extremely steep. You only need to get a rough idea of the structure of a validation rule, without having to pay attention to every character or every special keyword.
 
-openVALIDATION setzt relativ wenig Abstraktionsvermögen voraus. Diese Aufgabe übernimmt der Compiler selbst und entlasten somit den Anwender an dieser Stelle. Das ist der Kern der Philosophie hinter openVALIDATION:
+openVALIDATION requires relatively little abstraction ability on the part of the user. The compiler takes over this task itself and thus relieves the user at this point. This is the core of the philosophy behind openVALIDATION:
 
 > "Instead of forcing humans to understand the complex inner workings of machines, we should construct machines in a way, so they better understand us humans"
 
-Um diesen Komfort dem Anwender zu ermöglichen, muss die Komplexität in die Verarbeitungslogik des Compilers verlagert werden. Vor Allem der Parser leistet an dieser Stelle den Großteil dieser Arbeit. Er kümmert sich darum, dass aus einem einzigen String ein komplexer hierarchischer Abstract Syntax Tree \(AST\) entsteht.
+To make this convenience available to the user, the complexity must be shifted into the processing logic of the compiler. Especially the parser does most of the work at this point. It takes care that a complex hierarchical Abstract Syntax Tree \(AST\) is created from a single string.
 
 ![the parser takes a normalized rule and creates an AST object](../../.gitbook/assets/image%20%2846%29.png)
 
-Um das zu ermöglichen besteht der Parser selbst aus 3 Komponenten:
+To make this possible the parser itself consists of 3 components:
 
-1. ANTLR Grammatik\(Lexer, Parser usw.\)
+1. ANTLR Grammar\(Lexer, Parser, Generator...\)
 2. Parse Tree Transformer
 3. Post Processors
 
-Jede dieser Unterkomponente hat eine bestimmte Aufgaben und bringt dementsprechend auch eine gewisse Komplexität mit sich mit. Die gesamte Logik für das Parsen der Validierungsregeln befindet sich im Package [io.openvalidation.antlr](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr).
+Each of these sub-components has a specific task and therefore involves a certain complexity. The entire logic for parsing the validation rules is contained in the package [io.openvalidation.antlr](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr).
 
 
 
 #### ANTLR Parser
 
-ANTLR Parser kümmert sich um den initialen Schritt des Parsens. An dieser Stelle wird aus einem Text ein generische AST erstellt. Dieser wird in ANTLR als **ParseTree** bezeichnet. An dieser Stelle wird der Text in einen vorläufigen Objektbaum überführt.  
+ANTLR Parser takes care of the initial step of parsing. At this point, a generic AST is created from a text. This is called **ParseTree** in ANTLR. At this point, the text is transferred to a temporary object tree.
 
-Das Herzstück der ANTL Parsing Routine ist die entsprechende ANTL Grammatik von openVALIDATION. Sie befindet sich in der Datei [main.g4](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/resources/main.g4) im Resources Ordner des [openvalidation-antlr](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-antlr) Modules.  Hier ist ein kleiner Ausschnitt daraus:
+The core of the ANTL parsing routine is the corresponding ANTL grammar of openVALIDATION. It is located in the file [main.g4](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/resources/main.g4) in the Resources folder of the [openvalidation-antlr](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-antlr) module. Here is a small excerpt of it:
 
 ```javascript
 grammar main;
@@ -261,9 +261,9 @@ rule_definition          :  IF? expression? THEN action?
 ...
 ```
 
-In dieser Grammatik werden vor allem die sogenannten Lexer Tokens und die Parser Rules definiert. Während Lexer Tokens die einzelnen Schlüsselwörter Darstellen bilden Parser Rules komplette Signaturen ab.  
+In this grammar the so-called lexer tokens and the parser rules are defined. While lexer tokens represent the individual keywords, parser rules represent complete signatures of words or the tokens.
 
-Hier ist der Beispiel für die Signatur eines Kommentars:
+Here is an example for the signature of a comment:
 
 ```javascript
 comment                  :  STRING? COMMENT unknown?;
@@ -274,29 +274,29 @@ COMMENT                  :  'ʬcommentʬ'[a-zA-Z0-9_]+;
 STRING                   :  ~('ʬ')+;
 ```
 
-Ein Kommentar besteht aus einem optionalem Lexer Token namens STRING gefolgt vom LEXER Token Comment und schließt mit einer optionalen Parser Rule unknown. Sobald in einem Paragraph irgendwo der String ʬcommentʬxxx vorkommt, dann greift automatisch diese Parser Rule.    
+A comment consists of an optional lexer token called **STRING** followed by the LEXER token **Comment** and concludes with an optional parser rule **unknown**. As soon as the string **ʬcommentʬxxx** appears somewhere in a paragraph, then this parser rule automatically takes effect.
 
-Anhand dieser Grammatik wird noch zur Design Time mittels **antlr4-maven-plugin'**s Java Code generiert. Dieser Code landet anschließend im Target Verzeichnis: **target/generated-sources/java/io/openvalidation/antlr/generated** und wird automatisch in das Hauptprojekt eingebunden. 
+Using this grammar, Java code is generated at design time using **antlr4-maven-plugin**'s Java code. This code is then placed in the target directory **target/generated-sources/java/io/openvalidation/antlr/generated** and is automatically integrated into the main project.
 
-Dieser Code wird anschließend in der Klasse [ANTLRExecutor](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/ANTLRExecutor.java) aggregiert. Dort wird auch der MainASTBuildListener eingebunden, der den Einstieg der nachfolgenden Transformationslogik darstellt.
+This code is then aggregated in the class [ANTLRExecutor](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/ANTLRExecutor.java). There the [MainASTBuildListener](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/MainASTBuildListener.java) is also included, which is the entry point for the following transformation logic.
 
-#### 
+
 
 #### Parse Tree Transformer
 
-Im Package io.openvalidation.antlr.transformation befindet sich die Transformationslogik des Parsers. Diese Logik kümmert sich vor allem darum, dass der durch ANTLR Parser zur Laufzeit erzeugte generische Parse Tree in das domainspezifische AST Model transformiert wird. Die Transformationslogik ist wie viele openVALIDATION Komponente recht modular aufgebaut. Jedes einzelne Modul kümmert sich um einen bestimmten logischen Bereich. Z.B. ist es die Aufgabe von [PTCommentTransformer](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/parsetree/PTCommentTransformer.java), den entsprechenden Teil des Parse Tree, nämlich den **mainParser.CommentContext** in das [ASTComment](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTComment.java) zu transformieren. Der Aufbaue dieser Transformatoren ist hierarchisch gestalten und folgt der logischen Hierarchie des Parse Tree's der wiederum aus der Grammatik\(main.g4\) resultiert.
+The package [io.openvalidation.antlr.transformation](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation) contains the transformation logic of the parser. This logic mainly takes care that the generic parse tree generated by the ANTLR parser at runtime is transformed into the domain-specific AST model. Like many openVALIDATION components, the transformation logic is quite modular. Each single module takes care of a certain logical area. For example, it is the task of [PTCommentTransformer](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/parsetree/PTCommentTransformer.java) to transform the corresponding part of the parse tree, namely the **mainParser.CommentContext** into the [ASTComment](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTComment.java). The structure of these transformers is hierarchical and follows the logical hierarchy of the parse tree, which in turn results from the grammar \(**main.g4**\).
 
-Jeder einzelner Transformer ist von der abstrakten Basisklasse [TransformerBase](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/TransformerBase.java) abgeleitet und muss die Methode transform\(\) implementieren. Dort finden die eigentliche Transformation zwischen den beiden Datenmodell statt. Mit Hilfe der Basismethode **ASTItem createASTItem\(ParseTree\)** kann man die Kinderelemente transformieren. Durch den Aufruf dieser Methode mit dem entsprechenden Parse Tree verläuft die Transformation hierarchisch von Oben nach Unten. Mit Hilfe der [TransformerFactory](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/TransformerFactory.java) wird abhängig vom Typ des Parse Tree's das entsprechende Transformer Modul geladen.
+Each individual transformer is derived from the abstract base class [TransformerBase](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/TransformerBase.java) and must implement the method **transform\(\)**. There the actual transformation between the two data models takes place. The base method **ASTItem createASTItem\(ParseTree\)** can be used to transform the child elements. By calling this method with the corresponding Parse Tree, the transformation runs hierarchically from top to bottom. The [TransformerFactory](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/TransformerFactory.java) is used to load the corresponding Transformer Module depending on the type of the **Parse Tree**.
 
-Nach dem Ablauf jeder einzelnen Transformation erfolgt der Aufruf des entsprechenden Post Prozessors. 
+After each transformation the corresponding post processor is called. 
 
 #### 
 
 #### Post Processors
 
-Im Transformationsschritt werden die AST Element und der gesamte Baum nur ganz grob erstellt. Es erfordert vieler weitere Verarbeitungsschritte, die den AST in seine endgültige Form überführen. Die Aufgabe übernehmen die Post Prozessoren. Diese sind ebenfalls modular aufgebaut und folgen der AST Hierarchie. Der Aufruf der einzelnen Module erfolgt abhängig vom Typ, erst nach dem Abschluss eines bestimmten Transformationsschrittes. Die Namenskonvention der Post Prozessoren sorgt dafür, dass man bereits am Namen die Ausführungseben erkennt. Z.B. wird ein [PostConditionImplicitBoolOperand](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/postprocessing/PostConditionImplicitBoolOperand.java) direkt nach der Transformation einer Condition aufgerufen, währen ein [PostModelNumbersResolver](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/postprocessing/PostModelNumbersResolver.java) erst nach der Transformation des AST Modells, also ganz am Ende der gesamten Transformation aufgerufen wird.  
+In the transformation step, the AST elements and the entire tree are created only very roughly. It requires many further processing steps to transform the AST into its final form. The post processors take over this task. These are also modular and follow the AST hierarchy. Depending on the type, the individual modules are called only after a certain transformation step has been completed. The naming convention of the post processors ensures that the execution levels can already be recognized by their names. For example, a [PostConditionImplicitBoolOperand](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/postprocessing/PostConditionImplicitBoolOperand.java) is called directly after the transformation of a condition, while a [PostModelNumbersResolver](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-antlr/src/main/java/io/openvalidation/antlr/transformation/postprocessing/PostModelNumbersResolver.java) is called only after the transformation of the AST model, i.e. at the very end of the entire transformation.
 
-Was genau passiert in den Post Prozessoren? Dazu schauen wir uns den bereits implementierten PostConditionImplicitBoolOperand an:
+What exactly happens in the post processors? Let's take a look at the already implemented **PostConditionImplicitBoolOperand**:
 
 ```java
 public class PostConditionImplicitBoolOperand extends PostProcessorSelfBase<ASTCondition> {
@@ -326,25 +326,25 @@ public class PostConditionImplicitBoolOperand extends PostProcessorSelfBase<ASTC
 }
 ```
 
-Die Aufgabe dieses Post Prozessors besteht darin eine unvollständig transformierte ASTCondition zu vervollständigen. Eine Bedingung besteht immer aus einem Linken und einem Rechten Operanden. Dazwischen befindet sich noch der Vergleichsoperator. In der Methode getFilter\(\) wird nach bestimmten Bedingungen gesucht, nämlich nach denen die nur einen boolschen operanden haben und einen Vergleichsoperator der entweder Equals oder Not Equals ist. Nur wenn die Bedingung der Methode getFilter\(\) erfüllt ist, wird die Methode processItem\(\) aufgerufen. Dort wird die bereits existierende allerdings noch unvollständige ASTCondition mit einem Operanden vervollständigt.  Da es ein impliziter boolscher Vergleich ist wird lediglich ein statisches "true" als rechter Operand hinzugefügt.
+The task of this post processor is to complete an incompletely transformed AST condition. A condition always consists of a left and a right operand. In between there is the comparison operator. The method **getFilter\(\)** searches for certain conditions, namely for those that have only one boolean operand and a comparison operator that is either Equals or Not Equals. Only if the condition of the method getFilter\(\) is fulfilled, the method **processItem\(\)** is called. There the already existing but still incomplete **ASTCondition** will be completed with an operand. Since it is an implicit boolean comparison, only a static **true** is added as the right operand.
 
-Dadurch werden folgende Regeln möglich:
+This makes the following rules possible:
 
 ```javascript
 the contract must be signed
 ```
 
-und hier ist das entsprechende Schema:
+and here is the corresponding scheme:
 
 ```javascript
 {signe:true}
 ```
 
-Diese und viele weiter Post Prozessoren bilden ein sehr flexibles Gerüst, welches es ermöglicht den AST nachträglich gezielt an bestimmten stellen zu manipulieren. 
+These and many other post processors form a very flexible framework, which makes it possible to manipulate the AST at specific points. 
 
 
 
-![verschiedene Zust&#xE4;nde einer Regel w&#xE4;hrend des Parsing Vorgangs](../../.gitbook/assets/image%20%2816%29.png)
+![different states of a rule during the parsing process](../../.gitbook/assets/image%20%2816%29.png)
 
 
 
