@@ -6,7 +6,7 @@ description: Description of the basic architecture
 
 At this point the core functionality and the corresponding architecture of **openVALIDATION** is described. This description does not include the CLI or REST component. A natural language rule and the corresponding schema are expected as input parameters. Afterwards the processing starts, which can be separated into 5 subroutines \(preprocessor, schema converter, parser, validation, generator\). At the end of the compilation process program code is generated.
 
-![simplified view of the entire compilation process](../../.gitbook/assets/image%20%2834%29.png)
+![simplified view of the entire compilation process](../../.gitbook/assets/image%20%2835%29.png)
 
 The preprocessor prepares the natural language rule. At this point, for example, a translation or normalization of the keywords \(aliases\) takes place. The parser generates the Abstract Syntax Tree \(AST\). The AST is the logical structure of the grammar, which in our case represents the domain of the validation rules. The AST is then processed further with the help of the generator, so that valid program code is generated at the end of the entire processing procedure.
 
@@ -29,7 +29,7 @@ Here is an excerpt from [aliases\_en.properties](https://github.com/openvalidati
 ...
 ```
 
-Die Auflösung bzw. die Normalisierung dieser Aliases erfolgt im Preprocessor. 
+These aliases will be resolved or normalized in the preprocessor.
 
 Any text can be placed around the keywords. We call it sematic sugar. Thanks to this **semantic sugar**, the creator can make his rules very flexible and describe the set of rules in much more detail. Other editors can better understand the rules while the machine simply ignores the semantic sugar. This flexibility is the core of the grammar of openVALIDATION. It makes it so natural compared to other DSL's.
 
@@ -187,7 +187,7 @@ than 18 years
 
 ```
 
-**should not** became **ʬconstraintʬmustnotʬshould\_20\_not** where the last part ...**should\_20\_not** is dynamic. At this point, the original form is preserved so that it is available after the parsing process, for example, for compiler messages or for other purposes. The front part **ʬconstraintʬmustnotʬ** is normalized. This is the part the parser knows. 
+**should not** became **ʬconstraintʬmustnotʬshould\_20\_not** where the last part ...**should\_20\_not** is dynamic. At this point, the original text is preserved so that it is available after the parsing process, for example, for compiler messages or for other purposes. The front part **ʬconstraintʬmustnotʬ** is normalized. This is the part the parser knows. 
 
 {% hint style="warning" %}
 The resolution of the aliases depends on the Culture Code used. When using e.g. **de**, only aliases from the German resource [aliases\_en.properties](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-core/src/main/resources/aliases_de.properties) are used.
@@ -226,7 +226,7 @@ openVALIDATION requires relatively little abstraction ability on the part of the
 
 To make this convenience available to the user, the complexity must be shifted into the processing logic of the compiler. Especially the parser does most of the work at this point. It takes care that a complex hierarchical Abstract Syntax Tree \(AST\) is created from a single string.
 
-![the parser takes a normalized rule and creates an AST object](../../.gitbook/assets/image%20%2846%29.png)
+![the parser takes a normalized rule and creates an AST object](../../.gitbook/assets/image%20%2848%29.png)
 
 To make this possible the parser itself consists of 3 components:
 
@@ -358,7 +358,7 @@ In the image you can see that e.g. a rule contains a condition and an error mess
 
 The complete AST model consists of many individual classes which together form a logical hierarchy. [ASTModel](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTModel.java)  is the aggregate root of this central domain model.
 
-![the package io.openvalidation.common.ast contains the AST model](../../.gitbook/assets/image%20%2852%29.png)
+![the package io.openvalidation.common.ast contains the AST model](../../.gitbook/assets/image%20%2854%29.png)
 
 The AST tree can easily be extended. For this purpose, each element must be derived at least from the class [ASTItem](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-common/src/main/java/io/openvalidation/common/ast/ASTItem.java). Depending on the position of the extension within the structure, a corresponding base class must be used.
 
@@ -372,7 +372,7 @@ Parsing is primarily about extracting all relevant information from a continuous
 
 After the AST has been successfully generated, it has to be validated before program code is generated in the next step with the help of the generator. This validation step ensures that the AST tree is consistent and valid.
 
-![the processing step Validation checks the AST and generates corresponding compiler messages](../../.gitbook/assets/image%20%2831%29.png)
+![the processing step Validation checks the AST and generates corresponding compiler messages](../../.gitbook/assets/image%20%2832%29.png)
 
 
 
@@ -394,7 +394,7 @@ The **age** attribute is used in these rules, but the schema only contains the a
 
 Such and many other checks are performed in the processing step "Validation". These check mechanisms are implemented in a modular way and are located in the [openvalidation-core](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-core) module.
 
-![the package io.openvalidation.core.validation contains the corresponding validators](../../.gitbook/assets/image%20%2856%29.png)
+![the package io.openvalidation.core.validation contains the corresponding validators](../../.gitbook/assets/image%20%2858%29.png)
 
 The ValidatorFactory creates a new instance of the corresponding validator for each individual element of the AST depending on its type. Thus, each validator takes care of a certain area of the AST.
 
@@ -432,7 +432,7 @@ More are to follow.
 
 Everything that is necessary to generate is located in the module [openvalidation-generation](https://github.com/openvalidation/openvalidation/tree/master/openvalidation-generation). The corresponding generator templates are located in the Resources folder:
 
-![](../../.gitbook/assets/image%20%2855%29.png)
+![](../../.gitbook/assets/image%20%2857%29.png)
 
 Each supported programming language has its own folder with the corresponding name. Generator templates for Javascript are located in the folder Javascript, for Java in Java, and so on. Cross-language templates are located in the folder common.
 
