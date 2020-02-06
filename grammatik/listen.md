@@ -34,7 +34,7 @@ Es sei angemerkt, dass die Funktion `ERSTE` über mehrere Schlüsselwörter genu
 
 ### Filterung von Listen mit Bedingung \(MIT-Funktion\)
 
-Bei der Validierung von Daten ist es häufig notwendig nur jene Elemente einer Liste betrachten, die eine vorgegebene Bedingung erfüllen. Für genau diesen Anwendungsfall existiert die Funktion `MIT`. Sie ermöglicht die  Filterung von Listen nach beliebigen Kriterien sowohl auf Listen mit einfachen Inhalten wie Zahlen als auch mit komplexen Inhalten wie Personen, die wiederum eigene Eigenschaften wie Namen und Alter haben können. Um beispielsweise eine einfache Liste von Zahlen zu filtern, muss man lediglich die zu filternde Listen nach dem Schlüsselwort `AUS` angeben, gefolgt vom Schlüsselwort `MIT` und der jeweiligen Bedingung. Das folgende Szenario stellt eine solche Filterung beispielhaft auf der Liste `Zahlen` dar:
+Bei der Validierung von Daten ist es häufig notwendig nur jene Elemente einer Liste zu betrachten, die eine vorgegebene Bedingung erfüllen. Für genau diesen Anwendungsfall existiert die Funktion `MIT`. Sie ermöglicht die  Filterung von Listen nach beliebigen Kriterien sowohl auf Listen mit einfachen Inhalten wie Zahlen als auch mit komplexen Inhalten wie Personen, die wiederum eigene Eigenschaften wie Namen und Alter haben können. Um beispielsweise eine einfache Liste von Zahlen zu filtern, muss man lediglich die zu filternde Listen nach dem Schlüsselwort `AUS` angeben, gefolgt vom Schlüsselwort `MIT` und der jeweiligen Bedingung. Das folgende Szenario stellt eine solche Filterung beispielhaft auf der Liste `Zahlen` dar:
 
 ```yaml
 Zahlen: [1,2,3,4,5,6,7,8,9,10]
