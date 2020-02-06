@@ -265,7 +265,7 @@ Name : Hallo
 
 Und so sieht der Request und der entsprechende Response im Postman aus:
 
-![](.gitbook/assets/image%20%2848%29.png)
+![](.gitbook/assets/image%20%2850%29.png)
 
 Wenn wir den Wert des Attributes `Name` auf **"Hallo"** setzen, kommt wie gewünscht die entsprechende Fehlermeldung im Response. Wenn wir den Wert verändern, dann kommt die Fehlermeldung nicht mehr. Herzlichen Glückwunsch, Du hast soeben deine erste Validierungsregel implementiert!
 
