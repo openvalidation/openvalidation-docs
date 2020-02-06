@@ -6,7 +6,7 @@ description: An dieser Stelle wird der Aufbau des core Projektes erläutert
 
 openVALIDATION ist in Java 8 als ein Maven multi-module Projekt realisiert. Das Repository ist auf GitHub unter [https://github.com/openvalidation/openvalidation](https://github.com/openvalidation/openvalidation) veröffentlicht.
 
-![Das Projekt ist in einzelne Module aufgeteilt](../../.gitbook/assets/image%20%2831%29.png)
+![Das Projekt ist in einzelne Module aufgeteilt](../../.gitbook/assets/image%20%2834%29.png)
 
 ### openvalidation-antlr
 
@@ -26,11 +26,11 @@ mit
 neue gebaut werden, damit das ANTLR Plugin aus der **main.g4** Grammatik die entsprechenden Parser Klassen generieren kann. Somit wird sichergestellt, dass die möglichen Änderungen an der Grammatik selbst aktualisiert werden.
 {% endhint %}
 
-![](../../.gitbook/assets/image%20%2842%29.png)
+![](../../.gitbook/assets/image%20%2846%29.png)
 
 Die meiste Implementierung des Moduls **openvalidation-antlr** beschäftigt sich mit der Erstellung des Abstract Syntax Trees. Dazu muss zuerst der durch ANTLR Parser geparste **Parse Tree** in einen initialen **AST** transformiert werden. Anschließend muss der **AST** mit den Postprozessoren finalisiert werden. 
 
-Mehr zu diesem Thema wird im Bereich [Architektur/Parser](architecture.md#parser) erklärt.
+Mehr zu diesem Thema wird im Bereich [Architectur/Parser](architecture.md#parser) erklärt.
 
 
 
@@ -48,13 +48,21 @@ Das CLI Projekt gehört eigentlich nicht zum Kern von openVALIDATION und wird de
 
 ### openvalidation-common
 
-xxx
+Das Modul **openvalidation-common** enthält hauptsächlich verschiedene Datenmodelle, vor Allem das AST Model und utils. Das Modul stellt Komponente bereit, die in allen anderen Module als Abhängigkeit verwendet werden können. 
 
+![](../../.gitbook/assets/image%20%2852%29.png)
 
+Mehr zum Thema [AST](architecture.md#abstract-syntax-tree-ast).
+
+Mehr zum Thema [DataSchema](architecture.md#schema-converter).
+
+### 
 
 ### openvalidation-core
 
 xxx
+
+![](../../.gitbook/assets/image%20%2829%29.png)
 
 
 
@@ -62,11 +70,15 @@ xxx
 
 xxx
 
+![](../../.gitbook/assets/image%20%2811%29.png)
+
 
 
 ### openvalidation-integration-tests and openvalidation-integration-generator
 
 xxx
+
+![](../../.gitbook/assets/image%20%2851%29.png)
 
 
 
