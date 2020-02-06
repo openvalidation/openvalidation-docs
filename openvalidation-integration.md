@@ -1,6 +1,6 @@
 # Regeln integrieren
 
-![](.gitbook/assets/image%20%2813%29.png)
+![](.gitbook/assets/image%20%2815%29.png)
 
 openVALIDATION ist ein multilingualer Crosscompiler. Dieser Compiler kann eine der natürlichen Sprachen wie z.B. Deutsch oder Englisch in eine der Programmiersprachen wie Java, C\#, JavaScript oder Python übersetzen. Logischerweise versteht openVALIDATION nicht die volle Bandbreite einer natürlichen  Sprache, sondern die Domäne der Validierungsregeln. Wichtig zu verstehen ist, dass am Ende eines Kompiliervorgangs Programmcode entsteht. Diesen Code kann der Entwickler in seiner Anwendung an der entsprechenden Stelle integrieren. Der erzeugte Code besteht aus 2 Komponenten: 
 
@@ -113,7 +113,7 @@ openVALIDATION REST Service listening on port 3000...
 
 Wir können unseren REST Service testen, indem wir entweder im Browser oder beispielsweise im Postman einen GET Request auf [http://localhost:3000/](http://localhost:3000/) absenden.
 
-![](.gitbook/assets/image%20%2826%29.png)
+![](.gitbook/assets/image%20%2828%29.png)
 
 Der Service läuft und macht, was er soll. Aktuell besitzt unser REST Service lediglich eine einfache GET Operation, die im Response "Hello World!" zurückliefert. Jetzt möchten wir den Service um eine weitere Service Operation erweitern, in der gesendete Daten validiert werden sollen. Dazu stoppen wir mit `STRG+C` den laufenden Service. 
 
@@ -265,7 +265,7 @@ Name : Hallo
 
 Und so sieht der Request und der entsprechende Response im Postman aus:
 
-![](.gitbook/assets/image%20%2850%29.png)
+![](.gitbook/assets/image%20%2856%29.png)
 
 Wenn wir den Wert des Attributes `Name` auf **"Hallo"** setzen, kommt wie gewünscht die entsprechende Fehlermeldung im Response. Wenn wir den Wert verändern, dann kommt die Fehlermeldung nicht mehr. Herzlichen Glückwunsch, Du hast soeben deine erste Validierungsregel implementiert!
 
