@@ -24,9 +24,10 @@
 ## contribution
 
 * [Contribution guide](contribution/contribution-guide/README.md)
-  * [Architecture](contribution/contribution-guide/architecture.md)
-  * [Project structure](contribution/contribution-guide/project-structure.md)
-* [For beginners](contribution/for-beginners.md)
+  * [For beginners](contribution/contribution-guide/for-beginners.md)
+* [Developer guide](contribution/developer-guide/README.md)
+  * [Architecture](contribution/developer-guide/architecture.md)
+  * [Project structure](contribution/developer-guide/project-structure.md)
 
 ## OpenAPI Support <a id="openapi"></a>
 
