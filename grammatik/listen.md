@@ -18,7 +18,7 @@ Die ERSTE Zahl AUS meinen Lieblingszahlen ALS erste Lieblingszahl
 Meine erste Lieblingszahl DARF NICHT 1 sein
 ```
 
-Des weiteren ist es möglich, sich mehrere Elemente einer Liste auf einmal zu holen, indem man der Funktion eine Anzahl mitteilt. Zum Beispiel enthält die folgende Variable die Liste der ersten drei Elemente der Liste:
+Des Weiteren ist es möglich, sich mehrere Elemente einer Liste auf einmal zu holen, indem man der Funktion eine Anzahl mitteilt. Zum Beispiel enthält die folgende Variable die Liste der ersten drei Elemente der Liste:
 
 ```yaml
 Die ERSTEN 3 Zahlen AUS meinen Lieblingszahlen ALS Top 3
@@ -34,7 +34,7 @@ Es sei angemerkt, dass die Funktion `ERSTE` über mehrere Schlüsselwörter genu
 
 ### Filterung von Listen mit Bedingung \(MIT-Funktion\)
 
-Bei der Validierung von Daten ist es häufig notwendig nur jene Elemente einer Liste zu betrachten, die eine vorgegebene Bedingung erfüllen. Für genau diesen Anwendungsfall existiert die Funktion `MIT`. Sie ermöglicht die  Filterung von Listen nach beliebigen Kriterien sowohl auf Listen mit einfachen Inhalten wie Zahlen als auch mit komplexen Inhalten wie Personen, die wiederum eigene Eigenschaften wie Namen und Alter haben können. Um beispielsweise eine einfache Liste von Zahlen zu filtern, muss man lediglich die zu filternde Listen nach dem Schlüsselwort `AUS` angeben, gefolgt vom Schlüsselwort `MIT` und der jeweiligen Bedingung. Das folgende Szenario stellt eine solche Filterung beispielhaft auf der Liste `Zahlen` dar:
+Bei der Validierung von Daten ist es häufig notwendig nur jene Elemente einer Liste zu betrachten, die eine vorgegebene Bedingung erfüllen. Für genau diesen Anwendungsfall existiert die Funktion `MIT`. Sie ermöglicht die  Filterung von Listen nach beliebigen Kriterien sowohl auf Listen mit einfachen Inhalten, wie Zahlen, als auch mit komplexen Inhalten, wie Personen, die wiederum eigene Eigenschaften, wie Namen und Alter haben können. Um beispielsweise eine einfache Liste von Zahlen zu filtern, muss man lediglich die zu filternde Liste nach dem Schlüsselwort `AUS` angeben, gefolgt vom Schlüsselwort `MIT` und der jeweiligen Bedingung. Das folgende Szenario stellt eine solche Filterung beispielhaft auf der Liste `Zahlen` dar:
 
 ```yaml
 Zahlen: [1,2,3,4,5,6,7,8,9,10]
@@ -46,7 +46,7 @@ Mithilfe des folgenden Ausdrucks lassen sich beispielsweise die Zahlen von 6 bis
 Alle Elemente AUS Zahlen MIT einem Wert GRÖßER 5 ALS MeineListe
 ```
 
-Die Filterung von Listen mit komplexen Inhalten gilt als häufiger Anwendungsfall im Rahmen der Validierung. Da sich diese Form der Filterung von der vorangegangen einfacheren Variante unterscheidet, sei zu Orientierung zunächst das folgende Schema gegeben.:
+Die Filterung von Listen mit komplexen Inhalten gilt als häufiger Anwendungsfall im Rahmen der Validierung. Da sich diese Form der Filterung von der vorangegangen einfacheren Variante unterscheidet, sei zur Orientierung zunächst das folgende Schema gegeben.:
 
 ```yaml
 Bewerberliste: [
@@ -57,13 +57,13 @@ Bewerberliste: [
 
 Das Schema besitzt eine Liste mit dem Namen `Bewerberliste`. Jedes Element \(je eins in Zeile 2, 3 und 4\) innerhalb dieser ist einheitlich strukturiert und besitzt jeweils einen eigenen `Namen`und ein eigenes `Alter`. So ließe sich beispielsweise jedes Element als eine Person interpretieren.
 
-Angenommen die Liste der Bewerber soll jetzt nach ihrem Alter gefiltert werden. Nämlich in der Art, dass lediglich Bewerber genommen werden, die jünger sind als 20. Da feststeht, dass jedes Element eine Eigenschaft `Alter` besitzt, kann diese in der Filterung verwendet werden. Einen Ausdruck, der eine solche Filterung durchführt, zeigt dieses Beispiel:
+Angenommen die Liste der Bewerber soll jetzt nach ihrem `Alter` gefiltert werden. Nämlich in der Art, dass lediglich Bewerber genommen werden, die jünger sind als 20. Da feststeht, dass jedes Element eine Eigenschaft `Alter` besitzt, kann diese in der Filterung verwendet werden. Einen Ausdruck, der eine solche Filterung durchführt, zeigt dieses Beispiel:
 
 ```yaml
 Alle Personen AUS der Bewerberliste mit einem Alter KLEINER als 20 ALS Junioren
 ```
 
-Die Variable `Junioren` enthält nun die beiden Elemente mit dem Namen `Peter` bzw. `Klaus`, da ihre entsprechende Alter kleiner sind als 20. Würde man die resultierende Liste als Schema notieren, würde sie samt ihrem Inhalt wie folgt aussehen:
+Die Variable `Junioren` enthält nun die beiden Elemente mit dem Namen `Peter` bzw. `Klaus`, da ihre entsprechenden `Alter` kleiner sind als 20. Würde man die resultierende Liste als Schema notieren, würde sie samt ihres Inhalts wie folgt aussehen:
 
 ```yaml
 Junioren: [
@@ -81,7 +81,7 @@ Diese Liste kann dann zur weiteren Validierung genutzt werden.
 
 ### ERSTE und LETZTE in Kombination mit Bedingung
 
-Ein weiterer Teil der Funktionalität von `ERSTE` und `LETZTE` ist die Erweiterungsmöglichkeit durch eine Bedingung. Die Bedingung bezieht sich dabei auf die Elemente der Liste und ermittelt dann das erste bzw. letzte Element, dass die gegebene Bedingung erfüllt. Da sich die beiden Funktionen vom Aufbau nicht unterscheiden, werden die kommenden Beispiele anhand der Funktion `ERSTE` vorgestellt. Sei folgendes Schema mit einer Liste von Zahlen gegeben:
+Ein weiterer Teil der Funktionalität von `ERSTE` und `LETZTE` ist die Erweiterungsmöglichkeit durch eine Bedingung. Die Bedingung bezieht sich dabei auf die Elemente der Liste und ermittelt das erste bzw. letzte Element, das die gegebene Bedingung erfüllt. Da sich die beiden Funktionen vom Aufbau nicht unterscheiden, werden die kommenden Beispiele anhand der Funktion `ERSTE` vorgestellt. Sei folgendes Schema mit einer Liste von Zahlen gegeben:
 
 ```yaml
 Lieblingszahlen: [1,2,4,8,16,32]
