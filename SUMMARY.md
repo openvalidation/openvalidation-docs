@@ -24,7 +24,8 @@
 ## contribution
 
 * [Contribution guide](contribution/contribution-guide/README.md)
-  * [For beginners](contribution/for-beginners.md)
+  * [For beginners](contribution/contribution-guide/for-beginners.md)
+  * [For Non-Programmers](contribution/contribution-guide/for-non-programmers.md)
   * [Code of Conduct](contribution/contribution-guide/code-of-conduct.md)
 * [Developer guide](contribution/developer-guide/README.md)
   * [Setup the development environment](contribution/developer-guide/setup-the-development-environment.md)
