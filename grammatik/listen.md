@@ -118,7 +118,7 @@ Die ERSTE Person AUS der Bewerberliste MIT einem Alter GRÖßER als 18 ALS Peter
 
 ### Filterung von Listen mit komplexen Inhalten nach Eigenschaft
 
-Eine weitere Form der Filterung auf Listen mit komplexen Inhalten ist die Filterung nach Eigenschaften. Konkret bedeutet das, dass man aus einer Liste solcher komplexen Elemente mit eigenen Eigenschaften eine Liste der Eigenschaften erzeugt. Zur veranschaulichen sei folgendes Schema gegeben:
+Eine weitere Form der Filterung auf Listen mit komplexen Inhalten ist die Filterung nach Eigenschaften. Konkret bedeutet das, dass man aus einer Liste solcher komplexen Elemente mit eigenen Eigenschaften eine Liste der Eigenschaften erzeugt. Zur Veranschaulichung sei folgendes Schema gegeben:
 
 ```yaml
 Bewerberliste: [
@@ -127,13 +127,13 @@ Bewerberliste: [
     {Name: "Frieda", Alter: 38}]
 ```
 
-Die Liste `Bewerberliste` ist eine Liste mit drei Personen \(Zeilen 2-4\), wobei jede Person jeweils die Eigenschaften `Name` und `Alter` besitzt. Der folgende Ausdruck dient beispielsweise der Filterung nach dem Alter:
+Die Liste `Bewerberliste` ist eine Liste mit drei Personen \(Zeilen 2-4\), wobei jede Person jeweils die Eigenschaften `Name` und `Alter` besitzt. Der folgende Ausdruck dient beispielsweise der Filterung nach dem `Alter`:
 
 ```yaml
 Bewerberliste.Alter ALS Altersliste
 ```
 
-Wie in dem Beispiel zu erkennen ist, erfolgt die Filterung, indem man den Listennamen und die Eigenschaft verbunden mit `.` angibt. Die Reihenfolge der Werte bleibt dabei erhalten. Die Variable `Altersliste` enthält dann die Liste der Alter der Personen aus der `Bewerberliste` und hätte folgenden Inhalt:
+Wie in dem Beispiel zu erkennen ist, erfolgt die Filterung, indem man den Listennamen und die Eigenschaft verbunden mit `.` angibt. Die Reihenfolge der Werte bleibt dabei erhalten. Die Variable `Altersliste` enthält somit die Liste der `Alter` der Personen aus der `Bewerberliste` und besitzt folgenden Inhalt:
 
 ```yaml
 Altersliste: [17,19,38]
@@ -151,14 +151,12 @@ Funktionen müssen immer innerhalb einer Variablen definiert werden.
 
 Zur Verarbeitung von Listen stellt openVALIDATION Funktionen zu Verfügung. Mit ihrer Hilfe lassen sich gezielt Elemente extrahieren und Listen filtern, die dann zur weiteren Validierung genutzt werden können. Folgende Tabelle gibt einen Überblick über alle verfügbaren Funktionen:
 
-Die folgende Tabelle gibt einen Überblick über alle verfügbaren Funktionen:
-
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Funktion</th>
       <th style="text-align:left">Beschreibung</th>
       <th style="text-align:left">Aliase</th>
+      <th style="text-align:left"></th>
     </tr>
   </thead>
   <tbody>
@@ -183,7 +181,7 @@ Die folgende Tabelle gibt einen Überblick über alle verfügbaren Funktionen:
       <td style="text-align:left">MIT</td>
       <td style="text-align:left">Gibt die Liste aller Elemente zur&#xFC;ck, die die Bedingung erf&#xFC;llen.</td>
       <td
-      style="text-align:left">todo</td>
+      style="text-align:left">-</td>
     </tr>
   </tbody>
 </table>{% hint style="warning" %}
