@@ -46,7 +46,7 @@ Mithilfe des folgenden Ausdrucks lassen sich beispielsweise die Zahlen von 6 bis
 Alle Elemente AUS Zahlen MIT einem Wert GRÖßER 5 ALS MeineListe
 ```
 
-Die Filterung von Listen mit komplexen Inhalten gilt als häufiger Anwendungsfall im Rahmen der Validierung. Da sich diese Form der Filterung von der vorangegangen einfacheren Variante unterscheidet, sei zur Orientierung zunächst das folgende Schema gegeben.:
+Die Filterung von Listen mit komplexen Inhalten gilt als häufiger Anwendungsfall im Rahmen der Validierung. Da sich diese Form der Filterung von der vorangegangen einfacheren Variante unterscheidet, sei zur Orientierung zunächst das folgende Schema gegeben:
 
 ```yaml
 Bewerberliste: [
@@ -60,7 +60,7 @@ Das Schema besitzt eine Liste mit dem Namen `Bewerberliste`. Jedes Element \(je 
 Angenommen die Liste der Bewerber soll jetzt nach ihrem `Alter` gefiltert werden. Nämlich in der Art, dass lediglich Bewerber genommen werden, die jünger sind als 20. Da feststeht, dass jedes Element eine Eigenschaft `Alter` besitzt, kann diese in der Filterung verwendet werden. Einen Ausdruck, der eine solche Filterung durchführt, zeigt dieses Beispiel:
 
 ```yaml
-Alle Personen AUS der Bewerberliste mit einem Alter KLEINER als 20 ALS Junioren
+Alle Personen AUS der Bewerberliste MIT einem Alter KLEINER als 20 ALS Junioren
 ```
 
 Die Variable `Junioren` enthält nun die beiden Elemente mit dem Namen `Peter` bzw. `Klaus`, da ihre entsprechenden `Alter` kleiner sind als 20. Würde man die resultierende Liste als Schema notieren, würde sie samt ihres Inhalts wie folgt aussehen:
@@ -108,7 +108,7 @@ Bewerberliste: [
     {Name: "Frieda", Alter: 38}]
 ```
 
-Um die Person mit dem `Namen` "Peter" aus der Liste zu extrahieren, könnte man sich an den `Altern` der Personen orientieren. Da Peter die erste Person in der Liste ist, die älter ist als 18, ließe er sich mit folgendem Ausdruck extrahieren:
+Um die Person mit dem `Namen` "Klaus" aus der Liste zu extrahieren, könnte man sich an den `Altern` der Personen orientieren. Da Klaus die erste Person in der Liste ist, die älter ist als 18, ließe er sich mit folgendem Ausdruck extrahieren:
 
 ```yaml
 Die ERSTE Person AUS der Bewerberliste MIT einem Alter GRÖßER als 18 ALS Peter
@@ -145,18 +145,14 @@ Altersliste: [17,19,38]
 
 ### Referenz
 
-{% hint style="info" %}
-Funktionen müssen immer innerhalb einer Variablen definiert werden.
-{% endhint %}
-
 Zur Verarbeitung von Listen stellt openVALIDATION Funktionen zu Verfügung. Mit ihrer Hilfe lassen sich gezielt Elemente extrahieren und Listen filtern, die dann zur weiteren Validierung genutzt werden können. Folgende Tabelle gibt einen Überblick über alle verfügbaren Funktionen:
 
 <table>
   <thead>
     <tr>
+      <th style="text-align:left">Funktion</th>
       <th style="text-align:left">Beschreibung</th>
       <th style="text-align:left">Aliase</th>
-      <th style="text-align:left"></th>
     </tr>
   </thead>
   <tbody>
