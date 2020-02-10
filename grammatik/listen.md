@@ -6,7 +6,7 @@ Sowohl die Validierung einzelner Objekte aus Listen wie auch Listen als Ganzes l
 
 ### Erstes und letztes Element einer Liste \(ERSTE- und LETZTE-Funktion\)
 
-Wie die Namen der Funktionen `ERSTE` und `LETZTE` vermuten lassen, werden sie dazu verwendet auf das jeweils erste bzw. letzte Elemente einer Liste zuzugreifen. Mit ihnen lässt sich beispielsweise folgende Regel auf dem unten aufgeführten Schema definieren, die jedes Mal fehlschlägt, wenn das erste Element der Liste nicht `1` ist:
+Wie die Namen der Funktionen `ERSTE` und `LETZTE` vermuten lassen, werden sie dazu verwendet auf das jeweils erste bzw. letzte Elemente einer Liste zuzugreifen. Mit ihnen lässt sich beispielsweise folgende Regel auf dem unten aufgeführten Schema definieren, die jedes Mal fehlschlägt, wenn das erste Element der Liste `1` ist:
 
 ```yaml
 Lieblingszahlen: [1, 2, 4, 8, 16]
@@ -15,7 +15,7 @@ Lieblingszahlen: [1, 2, 4, 8, 16]
 ```yaml
 Die ERSTE Zahl AUS meinen Lieblingszahlen ALS erste Lieblingszahl
 
-Meine erste Lieblingszahl MUSS eine 1 sein
+Meine erste Lieblingszahl DARF NICHT 1 sein
 ```
 
 Des weiteren ist es möglich, sich mehrere Elemente einer Liste auf einmal zu holen, indem man der Funktion eine Anzahl mitteilt. Zum Beispiel enthält die folgende Variable die Liste der ersten drei Elemente der Liste:
