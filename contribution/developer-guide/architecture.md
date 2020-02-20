@@ -190,7 +190,7 @@ than 18 years
 The keyword **should not** became **ʬconstraintʬmustnotʬshould\_20\_not** where the last part ...**should\_20\_not** is dynamic. It is used to preserve the original text so that it is still available after the parsing process, for example, for compiler messages or for other purposes. The front part **ʬconstraintʬmustnotʬ** is normalized. This is the part the parser knows. 
 
 {% hint style="warning" %}
-The resolution of the aliases depends on the **culture code** used. When using e.g. **de**, only aliases from the German resource file [aliases\_en.properties](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-core/src/main/resources/aliases_de.properties) are used.
+The resolution of the aliases depends on the **culture code** used. When using e.g. **de**, only aliases from the German resource file [aliases\_de.properties](https://github.com/openvalidation/openvalidation/blob/master/openvalidation-core/src/main/resources/aliases_de.properties) are used.
 {% endhint %}
 
 
