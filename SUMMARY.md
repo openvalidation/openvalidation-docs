@@ -28,9 +28,10 @@
   * [For Non-Programmers](contribution/contribution-guide/for-non-programmers.md)
   * [Code of Conduct](contribution/contribution-guide/code-of-conduct.md)
 * [Developer guide](contribution/developer-guide/README.md)
+  * [IDE](contribution/developer-guide/ide.md)
   * [Setup the development environment](contribution/developer-guide/setup-the-development-environment.md)
   * [Architecture](contribution/developer-guide/architecture.md)
-  * [Project structure](contribution/contribution-guide/project-structure.md)
+  * [Project structure](contribution/developer-guide/project-structure.md)
   * [Unit and integration tests](contribution/developer-guide/unit-and-integration-tests.md)
 
 ## OpenAPI Support <a id="openapi"></a>
