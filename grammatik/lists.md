@@ -50,7 +50,7 @@ master_degree: Master
 ```yaml
 Bachelor als bachelor degree
 
-None, bachelor degree and master degree as degrees
+None, bachelor degree and master_degree as degrees
 ```
 
 
@@ -205,10 +205,14 @@ For example, the following rule can be used to check whether the `age` matches a
 The age must be one of the magic numbers
 ```
 
-This rule fails precisely when the age is not `65`, `43` or `21`. It should be noted that there is a way to imply `ONE_OF` when using array that are defined inside a rule. For example
+This rule fails precisely when the age is not `65`, `43` or `21`. It should be noted that there is a way to imply `ONE_OF` when using array that are defined inside a rule. For example the following to rules are equivalent:
 
 ```coffeescript
 The age must be 65, 43 or 21 
+```
+
+```coffeescript
+The age must be one of 65, 43 or 21 
 ```
 
 
@@ -222,6 +226,8 @@ openVALIDATION provides several functions for processing lists. They can be used
 | FIRST | Takes the first _n_ elements of the list. The number _n_ is optional and is interpreted as 1 if no specification is made. | - |
 | LAST | Takes the last _n_ elements of the list. The number _n_ is optional and is interpreted as 1 if no specification is made. | - |
 | WITH | Gives the list of all elements of a list that fulfill the condition. | - |
+| ONE\_OF | Checks for an object and a list that least one element of the list is equal to the object. | - |
+| NONE\_OF | Checks for an object and a list that no element of the list is equal to the object. | - |
 
 {% hint style="warning" %}
 Functions must always be defined within a variable.
