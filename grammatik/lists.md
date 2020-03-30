@@ -4,6 +4,55 @@
 
 Both the validation of individual objects from lists and lists as a whole can be realized with the help of openVALIDATION. This section deals with the processing possibilities of lists and introduces the basic concepts and functions on lists.
 
+### 
+
+### Defining custom lists
+
+There are two ways in which lists are available for validation in openVALIDATION. In the first case, the list is defined as input via the schema, such as:
+
+```yaml
+numbers: [1, 2, 4, 8, 16]
+```
+
+However, it is also possible to define lists manually, which either contain elements that dont change or ones that represent other variables or schema properties. The following schema is given as an example:
+
+```yaml
+degree: Bachelor
+```
+
+Assuming the property `degree` is to be one of the three values `None`, `Bachelor` and `Master`, a list variable `degrees` that contains these three values can be defined as
+
+```yaml
+None, Bachelor and Master as degrees
+```
+
+The characters `,` , `and` and `or` separate the individual elements of the list. You can then formulate a rule that checks whether the `degree` is included in `degrees`.
+
+```yaml
+None, Bachelor and Master as degrees
+
+The degree must be one of degrees
+```
+
+More information about the `ONE_OF` function can be found further down in the corresponding section. Similarly, lists can be defined outside of variables, directly in rules, for example:
+
+```yaml
+The degree must be one of None, Bachelor or Master
+```
+
+While the list may contain only words or only numbers, for example, its contents can be selected freely. This means that both properties from the schema and other variables can be defined as part of the list. The following list definition demonstrates this as an example using the schema
+
+```yaml
+degree: Kein
+master_degree: Master
+```
+
+```yaml
+Bachelor als bachelor degree
+
+None, bachelor degree and master degree as degrees
+```
+
 
 
 ### First and last element of a list \(FIRST and LAST function\)
@@ -140,6 +189,27 @@ age_list: [17,19,38]
 ```
 
 
+
+### Quantitative validation of lists
+
+When validating lists, it is often necessary to be able to make quantitative statements about their content. For this purpose openVALIDATION provides the functions `ONE_OF` and `NONE_OF`, which can be used to check whether an element is contained in the list. As an example, the schema is first defined.
+
+```yaml
+magic_numbers: [65,43,21]
+age: 33
+```
+
+For example, the following rule can be used to check whether the `age` matches an item in the `magic_numbers` list:
+
+```coffeescript
+The age must be one of the magic numbers
+```
+
+This rule fails precisely when the age is not `65`, `43` or `21`. It should be noted that there is a way to imply `ONE_OF` when using array that are defined inside a rule. For example
+
+```coffeescript
+The age must be 65, 43 or 21 
+```
 
 
 
