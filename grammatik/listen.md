@@ -205,7 +205,17 @@ Mithilfe der folgenden Regel lässt sich beispielsweise prüfen, ob das `Alter` 
 Das Alter muss eins von Magische_Alter sein
 ```
 
-Diese Regel schlägt also genau dann fehl, wenn das `Alter` nicht `65`, `43` oder `21` ist.
+Diese Regel schlägt also genau dann fehl, wenn das `Alter` nicht `65`, `43` oder `21` ist. Ein Spezialfall, bei dem die Funktion `EINS_VON` impliziert wird ist die Definition von Listen innerhalb einer Regel. Zum Beispiel sind die folgenden beiden Regeln gleichbedeutend:
+
+```coffeescript
+Das Alter muss 65, 43 oder 21 sein
+```
+
+```coffeescript
+Das Alter muss eins von 65, 43 oder 21 sein
+```
+
+
 
 
 
