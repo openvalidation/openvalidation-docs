@@ -38,7 +38,7 @@ Mehr Informationen zur `EINER_VON`-Funktion findest du [hier](https://app.gitboo
 Der Abschluss muss einer von Kein, Bachelor und Master sein
 ```
 
-Während die Liste beispielsweise nur Wörter oder nu Zahlen enthalten darf. ist ihr Inhalt beliebig wählbar. Das bedeutet, dass sowohl Eigenschaften aus dem Schema also auch andere Variablen als teil der Liste definiert werden können. Die folgende Listendefinition demonstriert das als Beispiel anhand des Schemas
+Während die Liste beispielsweise nur Wörter oder nur Zahlen enthalten darf. ist ihr Inhalt beliebig wählbar. Das bedeutet, dass sowohl Eigenschaften aus dem Schema also auch andere Variablen als teil der Liste definiert werden können. Die folgende Listendefinition demonstriert das als Beispiel anhand des Schemas
 
 ```yaml
 Abschluss: Kein
@@ -142,7 +142,7 @@ Das erste Element ließe sich mit diesem Ausdruck aus der Liste filtern:
 Die ERSTE Zahl AUS meinen Lieblingszahlen ALS Favorit
 ```
 
-Die Variable `Favorit` würde in diesem Fall die Zahl `1` enthalten. Wollte man nun anstatt `1` die Zahl `4` aus der Liste extrahieren, kann man die obige Funktion durch eine [`MIT` -Funktion](https://app.gitbook.com/@openvalidation/s/documentation/~/drafts/-M-OzcUdmrIsQMlXwpjH/v/de/grammatik/listen#filterung-von-listen-mit-bedingung-mit-funktion) erweitern. Der resultierende Ausdruck sieht dann wie folgt aus:
+Die Variable `Favorit` würde in diesem Fall die Zahl `1` enthalten. Wollte man nun anstatt `1` die Zahl `4` aus der Liste extrahieren, kann man die obige Funktion durch eine `MIT` -Funktion erweitern. Der resultierende Ausdruck sieht dann wie folgt aus:
 
 ```yaml
 Die ERSTE Zahl AUS meinen Lieblingszahlen MIT einem Wert GRÖßER als 2 ALS Favorit
