@@ -32,7 +32,7 @@ Kein, Bachelor und Master als Abschlüsse
 Der Abschluss muss einer von Abschlüsse sein
 ```
 
-Mehr Informationen zur `EINER_VON`-Funktion findest du [hier](https://app.gitbook.com/@openvalidation/s/documentation/~/drafts/-M-OzcUdmrIsQMlXwpjH/v/de/grammatik/listen#quantitative-validierung-von-listeninhalten). Analog dazu können Listen auch außerhalb von Variablen, direkt in Regeln definiert werden, zum Beispiel:
+Mehr Informationen zur `EINER_VON`-Funktion findest du [hier](https://app.gitbook.com/@openvalidation/s/documentation/~/drafts/-M3ei1IQrgm69tSd0sau/v/de/grammatik/listen#quantitative-validierung-von-listeninhalten). Analog dazu können Listen auch außerhalb von Variablen, direkt in Regeln definiert werden, zum Beispiel:
 
 ```yaml
 Der Abschluss muss einer von Kein, Bachelor und Master sein
