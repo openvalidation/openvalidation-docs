@@ -4,6 +4,55 @@ Sowohl die Validierung einzelner Objekte aus Listen wie auch Listen als Ganzes l
 
 
 
+### Definition eigener Listen
+
+Es gibt insgesamt zwei Arten, wie Listen in openVALIDATION zur Validierung vorliegen. Im ersten Fall wird die Liste als Eingabe über das Schema, wie beispielsweise
+
+```yaml
+Zahlen: [1, 2, 4, 8, 16]
+```
+
+definiert. Allerdings gibt es auch die Möglichkeit Listen manuell zu definieren, die beispielsweise immer die gleichen Elemente enthalten. Sei folgendes Schema als Beispiel gegeben:
+
+```yaml
+Abschluss: Bachelor
+```
+
+Angenommen die Eigenschaft Abschluss soll einen der drei Werte `Kein`, `Bachelor` und `Master` enthalten, dann lässt sich beispielsweise eine Variable `Abschlüsse` durch
+
+```yaml
+Kein, Bachelor und Master als Abschlüsse
+```
+
+definieren, die diese Werte enthält. Die Zeichen `,`, `und` und `oder` trennen dabei die einzelnen Elemente der Liste. Anschließend kann eine Regel formuliert werden, die prüft, ob der `Abschluss` in `Abschlüsse` enthalten ist.
+
+```yaml
+Kein, Bachelor und Master als Abschlüsse
+
+Der Abschluss muss einer von Abschlüsse sein
+```
+
+Mehr Informationen zur `EINER_VON`-Funktion findest du [hier](https://app.gitbook.com/@openvalidation/s/documentation/~/drafts/-M-OzcUdmrIsQMlXwpjH/v/de/grammatik/listen#quantitative-validierung-von-listeninhalten). Analog dazu können Listen auch außerhalb von Variablen, direkt in Regeln definiert werden, zum Beispiel:
+
+```yaml
+Der Abschluss muss einer von Kein, Bachelor und Master sein
+```
+
+Während die Liste beispielsweise nur Wörter oder nu Zahlen enthalten darf. ist ihr Inhalt beliebig wählbar. Das bedeutet, dass sowohl Eigenschaften aus dem Schema also auch andere Variablen als teil der Liste definiert werden können. Die folgende Listendefinition demonstriert das als Beispiel anhand des Schemas
+
+```yaml
+Abschluss: Kein
+Masterabschluss: Master
+```
+
+```yaml
+Bachelor als mittlerer Abschluss
+
+Kein, mittlerer Abschluss und Masterabschluss als Abschlüsse
+```
+
+
+
 ### Erstes und letztes Element einer Liste \(ERSTE- und LETZTE-Funktion\)
 
 Wie die Namen der Funktionen `ERSTE` und `LETZTE` vermuten lassen, werden sie dazu verwendet auf das jeweils erste bzw. letzte Elemente einer Liste zuzugreifen. Mit ihnen lässt sich beispielsweise folgende Regel auf dem unten aufgeführten Schema definieren, die jedes Mal fehlschlägt, wenn das erste Element der Liste `1` ist:
@@ -141,6 +190,23 @@ Altersliste: [17,19,38]
 
 
 
+### Quantitative Validierung von Listeninhalten
+
+Bei der Validierung von Listen ist es häufig notwendig quantitative Aussagen über ihren Inhalt treffen zu können. Dafür stellt openVALIDATION die Funktionen `EINS_VON` und `KEINS_VON` zur Verfügung, mit denen sich für ein Element überprüfen lässt, ob es in der Liste enthalten ist. Als Beispiel wird zunächst das Schema definiert.
+
+```yaml
+Magische_Alter: [65,43,21]
+Alter: 33
+```
+
+Mithilfe der folgenden Regel lässt sich beispielsweise prüfen, ob das `Alter` einem Element der Liste `Magische_Alter` entspricht:
+
+```coffeescript
+Das Alter muss eins von Magische_Alter sein
+```
+
+Diese Regel schlägt also genau dann fehl, wenn das `Alter` nicht `65`, `43` oder `21` ist.
+
 
 
 ### Referenz
@@ -178,6 +244,18 @@ Zur Verarbeitung von Listen stellt openVALIDATION Funktionen zu Verfügung. Mit 
       <td style="text-align:left">Gibt die Liste aller Elemente zur&#xFC;ck, die die Bedingung erf&#xFC;llen.</td>
       <td
       style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">EINS_VON</td>
+      <td style="text-align:left">Pr&#xFC;ft f&#xFC;r ein Objekt und eine Liste, ob das Objekt gleich zu
+        mindestens einem Element der Liste ist.</td>
+      <td style="text-align:left">EINER_VON, EINE_VON, EINS_AUS, EINER_AUS, EINE_AUS</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">KEINS_VON</td>
+      <td style="text-align:left">Pr&#xFC;ft f&#xFC;r ein Objekt und eine Liste, ob das Objekt von jedem
+        Element der Liste verschieden ist.</td>
+      <td style="text-align:left">-</td>
     </tr>
   </tbody>
 </table>{% hint style="warning" %}
