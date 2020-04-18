@@ -45,7 +45,9 @@ Service Layer: For encapsulating entities and controller \(through an additional
 
 ### Schema as an own aggregate
 
-In future a Schema can be shared, so the same Schema can be used in different Rulesets
+We decided to treat the schema as an own aggregate and independently of a ruleset, because it should be possible to share schemas between rulesets.
+
+Currently, a new schema will be created by creating a ruleset. At the moment it is also not possible to manage schemas independent of a ruleset. There is an [issue](https://github.com/openvalidation/openvalidation-ide/issues/166) about that on GitHub, this is one of the next items on the agenda.
 
 ### DTO's
 
