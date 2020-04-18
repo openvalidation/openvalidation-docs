@@ -63,7 +63,11 @@ The General-DTO gives us the opportunity, to only give that amount of informatio
 
 For mapping between DTO's and entities we use the external library [MapStruct](https://mapstruct.org/). Each entity has its own mapper.
 
+## Initialize and reset the database
+
 ### DatabaseInitializer
+
+The `DatabaseIntializer` is responsible for initializing the database with some sample data. The initialization will be executed at the application startup. Initial data will only be created, if the database is empty. Also, there are some out commented rules in the `DatabaseInitializer`. We have taken all sample rules from the [official playground](https://playground.openvalidation.io/) of openVALIDATION. Especially rules are commented out, where the syntax highlighting is not correctly shown in the openVALIDATION-IDE. The syntax highlighting is shown wrong, because at this moment \(April 18, 2020\) the [language server](https://github.com/openvalidation/openvalidation-languageserver) does not provide finely granulated information on syntax highlighting, so that we could correctly syntax highlight these rules. Nevertheless, we have already prepared the rules so that they can easily be uncommented as soon as the [language server](https://github.com/openvalidation/openvalidation-languageserver) provides the necessary information for syntax highlighting.
 
 ### Reset-Endpoint
 
