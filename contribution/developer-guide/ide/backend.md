@@ -48,7 +48,13 @@ The Web Layer only contains the controllers, whereas these controllers should be
 
 ### Package structure
 
+The structure of packages is inspired by Domain-Driven-Design. 
 
+The package `domain` holds all classes that are part of the domain. Inside of the `domain` package, there is a sub-package for each aggregate. The packages for the aggregates, which are `ruleset` and the `schema`, contain all the classes which belong to this aggregate. We decided, that only entities will get an own package below the aggregate packages. All other classes remain on the root of the aggregate/entity package.
+
+The `infrastructure` package contains all classes for configuration of the infrastructure. In the package database are the classes for initializing and resetting the database \(see section \[heading\]\(\#initialize-and-reset-the-database\)\). The package `httpclient` contains a class `CorsConfig` for configuring the CORS-Header.
+
+![Package structure](../../../.gitbook/assets/ovide-package-structure.png)
 
 ### Schema as an own aggregate
 
