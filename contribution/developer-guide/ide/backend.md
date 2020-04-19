@@ -40,8 +40,15 @@ You can find the official OpenAPI documentation through a Swagger-UI at [http://
 
 ## Architecture & architectural decisions
 
-Picture of architecture divided in: Web Layer, Service Layer and Repository Layer  
-Service Layer: For encapsulating entities and controller \(through an additional service layer\).
+The architecture of the openVALIDATION-IDE is divided through a Web-, Service- and Repository Layer. The basic idea behind this is that only contiguous layers communicate to each other. Furthermore, method calls always happen only from the upper to the lower layer.
+
+The Web Layer only contains the controllers, whereas these controllers should be as "dumb" as possible. They should just forward the incoming API-calls to the services. Between the Web- and the Service Layer only Data Transfer Objects \(DTO\) are passed. Through the Service-Layer, entities and controllers are encapsulated. The services contain the business logic, what also ensures that the controllers remain clean. Also exception handling happens in the services. Between the Service- and the Repository Layer, only entities are passed. The Repository Layer only contains the repositories. 
+
+![Layered architecture](../../../.gitbook/assets/ovide-architecture.png)
+
+### Package structure
+
+
 
 ### Schema as an own aggregate
 
@@ -51,7 +58,7 @@ Currently, a new schema will be created by creating a ruleset. At the moment it 
 
 ### DTO's
 
-One benefit of a Data Transfer Object \(DTO\) is, that we are free to decide for every special case, which information of our entities we want to reveal through our REST-API. Furthermore we have the freedom of changing our internal data model, without being forced to directly change our endpoints. We decided to implement DTO's inspired by CQRS-principles. We distinguish between three different kinds of DTO's:
+One benefit of a DTO is, that we are free to decide for every special case, which information of our entities we want to reveal through our REST-API. Furthermore we have the freedom of changing our internal data model, without being forced to directly change our endpoints. We decided to implement DTO's inspired by CQRS-principles. We distinguish between three different kinds of DTO's:
 
 | DTO-Type | Usage |
 | :--- | :--- |
