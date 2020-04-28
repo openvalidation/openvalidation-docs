@@ -8,7 +8,7 @@ Um die Funktionsweise des OV-OpenAPI Codegenerators zu demonstrieren, sollten wi
 4. Testen diesen mit Postman. 
 5. Und, falls uns am Ende langweilig werden sollte, erstellen wir aus demselben Service Contract einen JavaScript Client, der die Validierungsregeln clientseitig ausführen wird, bevor die Daten an den Service gesendet werden.  
 
-![](../.gitbook/assets/image%20%2840%29.png)
+![](../.gitbook/assets/image%20%2850%29.png)
 
 Für dieses Beispiel werden gewisse Kenntnisse wie z.B. OpenAPI, NPM und Grundlagen der modernen Frontend-Entwicklung vorausgesetzt. Des Weiteren müssen folgende technische Voraussetzungen erfüllt werden:
 
@@ -189,7 +189,7 @@ java -jar target/openapi-spring-1.0.0.jar
 
 Wenn alles geklappt hat, läuft der Service bereits am Port 8080 und wir können ihn einfach mal im Browser unter [http://localhost:8080/](http://localhost:8080/) aufrufen:
 
-![](../.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%289%29.png)
 
 {% hint style="info" %}
 Der openVALIDATION Generator enthält die gesamte Standard-Funktionalität des Original OpenAPI Generators und fügt lediglich die Verarbeitung der **x-ov-rules** Extension hinzu. Diese Verarbeitung umfasst unter anderem das Generieren der Validierungsregeln und deren Integration in das jeweilige Framework, wie z.B. in Spring Boot. Das Customizing ist gemäß dem offiziellen Customizing-Guide \([https://openapi-generator.tech/docs/customization.html](https://openapi-generator.tech/docs/customization.html)\) des OpenAPI Generators implementiert.
@@ -217,11 +217,11 @@ Zum Testen des Services kann man selbstverständlich die integrierte OpenAPI bzw
 {% endtab %}
 {% endtabs %}
 
-![](../.gitbook/assets/image%20%2832%29.png)
+![](../.gitbook/assets/image%20%2841%29.png)
 
 Wie erwartet bekommen wir eine Fehlermeldung, die besagt, dass der Ort des Bewerbers Dortmund sein muss. Diese Fehlermeldung wird durch die von uns spezifizierte Validierungsregel erzeugt. Wenn wir jetzt im Request den Wert des Attributs Ort von "Berlin" auf "Dortmund" verändern, dann kommt die Fehlermeldung nicht mehr.
 
-![](../.gitbook/assets/image%20%2836%29.png)
+![](../.gitbook/assets/image%20%2846%29.png)
 
 
 
@@ -319,11 +319,11 @@ Der Aufruf erzeugt eine JavaScript Datei namens **clientproxy.js**, welche wir d
 
 Jetzt vergewissern wir uns, dass der REST Service bereits läuft. Wenn nicht, starten wir den Serivce nochmal wie in [Schritt 3](openapi-tutorial.md#3-generieren-des-service-stubs-als-java-spring-boot) beschrieben. Nun öffnen wir die HTML Seite und geben in das Eingabefeld **"Berlin"** ein. Wie erwartet, kommt die Fehlermeldung _"der **Ort** des Bewerbers **MUSS Dortmund** sein"._ Das Spannende daran ist, dass diese Fehlermeldung bereits auf dem Client, noch vor dem Senden des Requests an den Server, erzeugt wird. Das können wir überprüfen, wenn wir uns den Tab **Network** in DeveloperTools vom Chrome anschauen:
 
-![](../.gitbook/assets/image%20%2859%29.png)
+![](../.gitbook/assets/image%20%2873%29.png)
 
 Wenn wir jetzt anstatt **"Berlin", "Dortmund"** eingeben, sehen wir, dass der Request an den Server gereicht wird und ein positiver Response mit dem HTTP Status Code 200 zurückkommt:
 
-![](../.gitbook/assets/image%20%2866%29.png)
+![](../.gitbook/assets/image%20%2881%29.png)
 
 Dieses Beispiel demonstriert die Möglichkeit der Generierung von Validierungsregeln, sowohl innerhalb eines Service Stub's als auch innerhalb des entsprechenden Client Proxies. Und das noch für unterschiedliche Technologie Stacks.  
 
