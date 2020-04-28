@@ -31,6 +31,7 @@
   * [IDE](contribution/developer-guide/ide/README.md)
     * [Backend](contribution/developer-guide/ide/backend.md)
     * [Frontend](contribution/developer-guide/ide/frontend.md)
+    * [User guide](contribution/developer-guide/ide/user-guide.md)
   * [Setup the development environment](contribution/developer-guide/setup-the-development-environment.md)
   * [Architecture](contribution/developer-guide/architecture.md)
   * [Project structure](contribution/developer-guide/project-structure.md)
