@@ -1,6 +1,6 @@
 # Rules integration
 
-![](.gitbook/assets/image%20%2815%29.png)
+![](.gitbook/assets/image%20%2818%29.png)
 
 openVALIDATION is a multilingual cross compiler. This compiler can translate one of the natural languages such as German or English into one of the programming languages such as Java, C\#, JavaScript or Python. Logically, openVALIDATION does not understand the full range of a natural language, but the domain of validation rules. It is important to understand that program code is generated at the end of a compilation process. The developer can integrate this code into his application at the appropriate point. The generated code consists of two components:
 
@@ -107,7 +107,7 @@ openVALIDATION REST Service listening on port 3000...
 
 We can test our REST service by sending a GET request to [http://localhost:3000/](http://localhost:3000/) either in the browser or, for example, in Postman.
 
-![](.gitbook/assets/image%20%2828%29.png)
+![](.gitbook/assets/image%20%2834%29.png)
 
 The service runs and does what it's supposed to. Currently, our REST service only has a simple GET operation, which returns "Hello World! Now we would like to extend the service by another service operation, in which sent data should be validated. Therefore we stop the current service with `STRG+C`.
 
@@ -302,7 +302,7 @@ npm install mydomainrules --save
 
 So it wouldn't matter if these rules were created by another developer by hand or by a domain expert + openVALIDATION. At the end there is a package in a package repository!
 
-![](.gitbook/assets/image%20%289%29.png)
+![](.gitbook/assets/image%20%2810%29.png)
 
 
 
