@@ -189,6 +189,8 @@ Diese alternative Ausdrucksform muss einen sogenannten **Indikator** enthalten. 
   </tbody>
 </table>
 
+
+
 ## Regeln mit impliziten Bedingungen
 
 Die Grammatik von openVALIDATION ermöglich die Erstellung von Regeln mit impliziten Bedingungen. Diese Fähigkeit vereinfacht die Erstellung und das Verständnis von Regeln. Wir haben folgendes Schema:

@@ -1,6 +1,6 @@
 # Grammatik
 
-![](../.gitbook/assets/image%20%2838%29.png)
+![](../.gitbook/assets/image%20%2814%29%20%281%29.png)
 
 Die Sprache von openVALIDATION besitzt eine ganz besondere Grammatik. Sie ist sowohl formal, als auch natürlich. Einerseits trägt die Natürlichkeit dazu bei, die technischen Hürden einer zu formalen Sprache zu überwinden. Andererseits ermöglicht die verbliebene Formalität der Grundstruktur die maschinelle Verarbeitung.
 

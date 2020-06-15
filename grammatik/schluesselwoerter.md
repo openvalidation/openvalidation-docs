@@ -36,7 +36,9 @@ Eine Regel ist das wichtigste Konstrukt in der Grammatik von openVALIDATION. Die
       <td style="text-align:left">Ein Indikator identifiziert einen Ausdruck, als Regel.</td>
     </tr>
   </tbody>
-</table>## Vergleichsoperatoren
+</table>
+
+## Vergleichsoperatoren
 
 Eine Vergleichsoperation hat immer einen linken und einen rechten Operanden und den entsprechenden Vergleichsoperator. 
 

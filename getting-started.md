@@ -166,7 +166,7 @@ Jetzt möchten wir ausprobieren, ob unsere Regel auch funktioniert. Dazu erstell
 
 Wir rufen die **test.html** im Browser auf und geben _"Hallo"_  in das Eingabefeld ein:
 
-![](.gitbook/assets/image%20%2821%29.png)
+![](.gitbook/assets/image%20%286%29%20%281%29.png)
 
 Wie erwartet, kommt bei der Eingabe des Wertes "_Hallo"_  unsere Fehlermeldung. 
 

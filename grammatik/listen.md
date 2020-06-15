@@ -268,7 +268,9 @@ Zur Verarbeitung von Listen stellt openVALIDATION Funktionen zu Verfügung. Mit 
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>{% hint style="warning" %}
+</table>
+
+{% hint style="warning" %}
 Funktionen müssen immer innerhalb einer Variablen definiert werden.
 {% endhint %}
 
