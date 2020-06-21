@@ -16,7 +16,7 @@ First up inside the app folder, we find the core module among others. While the 
 
 ### Shared Module
 
-In Angular terminology best classified as a widget module, the shared module declares components, directives, and pipes used across the entire application. It is also used to import and then re-export commonly used modules from the Angular core and [Angular Material](https://material.angular.io/) UI component library. Since the shared module itself is used by each feature module, the modules mentioned before do not have to be explicitly imported again.
+In Angular terminology best classified as a widget module, the shared module declares components, directives, and pipes used across the entire application. It is also used to import and then re-export commonly used modules from the Angular core and [Angular Material](https://material.angular.io/) UI component library. Since the shared module itself is used by each feature module, the modules mentioned before do then not have to be explicitly imported again.
 
 ### Feature Modules
 
@@ -25,6 +25,10 @@ Structuring code into cohesive chunks of functionality called [feature modules](
 **ruleset-management:** Concerned with general management and selection of rulesets. It declares two components, one representing an input form for the creation of a ruleset and another one that displays a collection of rulesets to serve as an overview to look at and select rulesets.
 
 **ruleset-editor:** Declares a code editor component with support for openVALIDATION syntax through language server integration for which it provides a corresponding service. For further information about the inner workings of syntax highlighting and linting please refer to the separate section about the [Monaco Editor integration](frontend.md#monaco-editor-integration).
+
+**ruleset-ide:** Expands on the previously mentioned editor module with additional functionality like the visualization of errors, extraction, and display of important variables and the means to manipulate schema attributes. After all, this is the place where everything comes together to provide the user with an integrated development environment for everything rule-set related.
+
+**ruleset-testsuite:** While not being fully implemented just yet, the test-suite module once completed, will provide the means of defining and then automatically validating test cases. For the time being, this functionality is just implied through a visual mockup tho. Nonetheless, a gauge-chart component intended  to illustrate test outcomes is already in a finished state.
 
 ## OpenAPI client generation
 
