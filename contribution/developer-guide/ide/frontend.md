@@ -30,6 +30,14 @@ Structuring code into cohesive chunks of functionality called [feature modules](
 
 **ruleset-testsuite:** While not being fully implemented just yet, the test-suite module once completed, will provide the means of defining and then automatically validating test cases. For the time being, this functionality is just implied through a visual mockup tho. Nonetheless, a gauge-chart component intended  to illustrate test outcomes is already in a finished state.
 
+### Additional relevant Areas
+
+Referring back to the overview figure from the beginning of this section there are still four additional areas left not mentioned yet. First, there is the **assets** folder currently primarily containing static images for logos, icons but also some additional configuration to fulfill the special requirements of every platform.
+
+Angular allows for CSS rules to be isolated and bound to specific components. This approach is used throughout the App wherever applicable. There is still the need for some global style definitions tho. These reside inside the **styles** folder. Further elaboration on the topic can be found in the section about [theming](frontend.md#theme).
+
+**Environment** files containing static information are a vehicle used by angular to define an exchangeable configuration for different build targets. The **config** folder serves the same purpose with the key difference that it is not consumed by the angular compiler and ending up backed into the build artifacts. Why this is important for the way this application is intended to be deployed and additional information about available configuration options will be discussed in a separate section: [Environmental variables](frontend.md#environmental-variables).
+
 ## OpenAPI client generation
 
 Access to the backend is established by utilizing an auto-generated backend client which is created using an  [OpenAPI](https://www.openapis.org/) spec file provided by the [backend](backend.md).
@@ -45,4 +53,6 @@ Access to the backend is established by utilizing an auto-generated backend clie
 ### Linting
 
 ## Environmental variables
+
+talk about docker & nginx !
 
