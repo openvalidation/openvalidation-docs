@@ -46,13 +46,25 @@ Access to the backend is established by utilizing an auto-generated backend clie
 
 ## Monaco Editor integration
 
+To edit the rulesets created and managed by the IDE the [Monaco Editor](https://microsoft.github.io/monaco-editor/) is used. It has support for a lot of useful features like linting, auto-completion and syntax highlighting and is integrated into the project using the [ngx-monaco-editor](https://github.com/atularen/ngx-monaco-editor) Angular Component. Because the openVALIDATION language is custom, it needs a custom [language-server](https://github.com/openvalidation/openvalidation-languageserver) implementation to handle the above mentioned features. The code to integrate the custom language-server is contained in its own service. The language-server integration uses the [TypeFox monaco-languageclient](https://github.com/TypeFox/monaco-languageclient) library and was inspired by Niko Lueg's initial [client implementation](https://github.com/NLueg/monaco-ov) for the openvalidation-languageserver. This also includes the tokenizer that was only adapted to work with Angular and styled according to the projects linting guidelines.
+
 ### Syntax highlighting
 
-### Tokenizer
+Most of the syntax-highlighting features are implemented in the language-server. In order to improve the usability some features were added to the already included syntax-highlighting features. These include:
 
-### Linting
+* Highlighting schema attributes in their respective type color
+* Coloring the error messages after "then" in the appropriate error color
+* Marking boolean values in their respective color
+* Fixing syntax-highlighting errors when words include other keywords
 
 ## Environmental variables
+
+It is possible to configure the backend and language-server URLs using environment variables. These can be set in the docker-compose file or when the container is started.
+
+| Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| API\_BASE\_PATH | http://127.0.0.1:8080 | URL of the IDE Backend |
+| LANGUAGE\_SERVER\_URL | ws://127.0.0.1:3010 | URL of the language-server |
 
 talk about docker & nginx !
 
