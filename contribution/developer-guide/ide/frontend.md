@@ -36,11 +36,21 @@ Referring back to the overview figure from the beginning of this section there a
 
 Angular allows for CSS rules to be isolated and bound to specific components. This approach is used throughout the App wherever applicable. There is still the need for some global style definitions tho. These reside inside the **styles** folder. Further elaboration on the topic can be found in the section about [theming](frontend.md#theme).
 
-**Environment** files containing static information are a vehicle used by angular to define an exchangeable configuration for different build targets. The **config** folder serves the same purpose with the key difference that it is not consumed by the angular compiler and ending up backed into the build artifacts. Why this is important for the way this application is intended to be deployed and additional information about available configuration options will be discussed in a separate section: [Environmental variables](frontend.md#environmental-variables).
+**Environment** files containing static information are a vehicle introduced by angular to provide the ability to define an exchangeable configuration for different build targets. The **config** folder, not an angular default, serves the same purpose with the key difference that it is not consumed by the angular compiler and backed into the build artifacts. Why this is important for the way this application is intended to be deployed and additional information about available configuration options will be discussed in a separate section: [Environmental variables](frontend.md#environmental-variables).
 
 ## OpenAPI client generation
 
-Access to the backend is established by utilizing an auto-generated backend client which is created using an  [OpenAPI](https://www.openapis.org/) spec file provided by the [backend](backend.md).
+Access to the backend is established utilizing an auto-generated backend client. It is created using an [OpenAPI](https://www.openapis.org/) spec file provided by the [backend](backend.md). When the backend modifies its external interface in any meaningful way, a newly updated spec file will reflect these changes. The client code then needs to be re-generated using the new spec. This can be done by simply executing the following command from inside the fronted project:
+
+```text
+npm run generate-api-client
+```
+
+{% hint style="info" %}
+Note that the spec file is hosted by the backend itself, and therefore only accessible when the backend is actively running.
+{% endhint %}
+
+The script will then grab the new spec file and feed it, together with some accompanying configuration, into the [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). The generator is configured to use a specific  [template](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-angular.md), which will generate an angular module. This module is containing not only angular services ready to be used but also provides strongly typed interfaces for the required parameters and returned models. The aforementioned configuration can be found in a file named `openapi-generator-config.json`.
 
 ## Theme
 
