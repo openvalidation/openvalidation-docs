@@ -50,7 +50,7 @@ npm run generate-api-client
 Note that the spec file is hosted by the backend itself, and therefore only accessible when the backend is actively running.
 {% endhint %}
 
-The script will then grab the new spec file and feed it, together with some accompanying configuration, into the [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). The generator is configured to use a specific  [template](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-angular.md), which will generate an angular module. This module is containing not only angular services ready to be used but also provides strongly typed interfaces for the required parameters and returned models. The aforementioned configuration can be found in a file named `openapi-generator-config.json`.
+The script will then grab the new spec file and feed it, together with some accompanying configuration, into the [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). The generator is configured to use a specific  [template](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-angular.md), which will generate an angular module. This module is containing not only angular services ready to be used but also provides strongly typed interfaces for the required parameters and returned models. The aforementioned configuration can be found in a file named _`openapi-generator-config.json`_.
 
 ## Theme
 
@@ -76,5 +76,11 @@ It is possible to configure the backend and language-server URLs using environme
 | API\_BASE\_PATH | http://127.0.0.1:8080 | URL of the IDE Backend |
 | LANGUAGE\_SERVER\_URL | ws://127.0.0.1:3010 | URL of the language-server |
 
-talk about docker & nginx !
+In a default, angular application environmental variables can be set through the means of angular's predefined environment files. As mentioned earlier, these files are baked into the final artifacts when the application is built and hence cannot be altered after the fact. Docker environmental variables are used to customize already existing container images and therefore come into effect when the angular environment variables are already set and cannot be accessed anymore.
+
+To solve this problem values in the angular environment files are set to a global variable inside the window object e.g. `window['env']['API_BASE_PATH']`. These variables are set by a script that is loaded in the _`index.html`_ before angular is loaded. The default version of the script contains all the default values illustrated in the table above. Because the script is defined as a static asset of the angular application, it will not be baked into the application's code.
+
+Alongside the script containing the default values, which is named _`env.js`_ and to be found inside the conf folder, there is a template version called _`env.template.js`_ . The template version contains all the same definitions but with they're values set to a placeholder looking like this `"${API_BASE_PATH}"`.
+
+When the container is started, it takes the template version, replaces all variables with corresponding docker environment variables, and then finally replaces the default _`env.js`_ with this new values.
 
