@@ -58,7 +58,7 @@ Modern and appealing visual design is required to satisfy user expectations. For
 
 With these various requirements in mind, let’s take a look at some implementation details of the current solution. As discussed in an earlier [section](frontend.md#feature-modules), the application is split into various feature modules, each containing one or more sub-components. Most of the custom style definitions are specific to a particular angular component. With angular's characteristic to [scope styles](https://angular.io/guide/component-styles#style-scope) to a component, we gain the advantage not to worry about any potential side effects caused by overlapping style definitions. A maintainable and scalable theming solution should ideally support the capability to influence the visual appearance of the entire application from a single point while keeping the separation of concerns between components regarding individual styling.
 
-The style property we will most likely want to change in between themes is the color palette being used. For this reason, all theme relevant color definitions inside the components are replaced by SCSS variables. With the right tools, autocompletion for SCSS variables will work, but mistakes can still be made. To make the theme system more robust access to theme colors is made through a special [mixin](https://sass-lang.com/documentation/at-rules/mixin). The mixin will then cause build-time errors when an undefined color variable is used. Each color theme is defined as a [map](https://sass-lang.com/documentation/values/maps), the keys representing the variable, and the value being the assigned color.
+The style property we will most likely want to change in between themes is the color palette being used. For this reason, all theme relevant color definitions inside the components are replaced by SCSS variables. With the right tools, autocompletion for SCSS variables will work, but mistakes can still be made. To make the theme system more robust access to theme colors is made through a special function. The function will cause build-time errors when an undefined color variable is used. Each color theme is defined as a [map](https://sass-lang.com/documentation/values/maps), the keys representing the variable, and the value being the assigned color.
 
 {% hint style="warning" %}
 Always access theme colors through the **theme-var** mixin e.g.:`background-color: theme-var($--editor-background);`
@@ -66,7 +66,34 @@ Always access theme colors through the **theme-var** mixin e.g.:`background-colo
 
 Through the use of SCSS variables, a color palette for a theme can be defined globally, but there is still one crucial disadvantage. When SCSS is compiled into regular CSS, SCSS variables will be replaced by their contents and therefore become static values. Having themes with different color palettes would require separate pre-compiled CSS files. There is an elegant and easy solution, however:
 
-Instead of using SCSS variables directly, each of the SCSS variables in the theme is first defined with a unique native CSS variable as value. When compiled to CSS, the components will now contain CSS variables instead of static values. As CSS variables are evaluated in the browser at runtime, their value is dynamic.
+Instead of using SCSS variables directly, each of the SCSS variables in the theme is first defined with a unique native CSS variable as value. When compiled to CSS, the components will now contain CSS variables instead of static values. As CSS variables are evaluated in the browser at runtime, their value is dynamic. To set a CSS variable to the correct value, as defined inside the maps mentioned before, the map's contents need to be converted to CSS classes. This is done by a [mixin](https://sass-lang.com/documentation/at-rules/mixin), which is called once for each theme map. Changing the theme is now as easy as swapping out a single class. This way, the benefits of using SCSS variables can be retained while also providing the capability to change color palettes dynamically.
+
+{% tabs %}
+{% tab title="scss to css variable" %}
+```css
+// _variables.scss
+$--navbar-background: --navbar-background;
+```
+{% endtab %}
+
+{% tab title="map to class" %}
+```text
+// _mixins.scss
+@mixin spread-map($map: ()) {
+    @each $key, $value in $map {
+        #{$key}: $value;
+    }
+}
+
+// themes.scss
+:root.light-theme {
+    @include spread-map($light-theme)
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Finally, to provide the means of changing the theme programmatically in angular, there is a service called theme-service. The service exposes the functionality to transition between themes and provides the ability to query whether a dark or light theme is currently active.
 
 ## Monaco Editor integration
 
