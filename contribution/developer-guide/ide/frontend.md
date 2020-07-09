@@ -1,6 +1,6 @@
 # Frontend
 
-The user-facing part of openVALIDATION-IDE is realized as a single page web application powered by the [angular framework](https://angular.io/). TypeScript is used as the main programming language while HTML and SCSS are utilized for markup and styling respectively.
+The user-facing part of openVALIDATION-IDE is realized as a single page web application powered by the [angular framework](https://angular.io/). TypeScript is used as the main programming language while HTML and [SCSS](https://sass-lang.com/guide) are utilized for markup and styling respectively.
 
 After you've cloned the [repository](https://github.com/openvalidation/openvalidation-ide) you can install all dependencies through [npm](https://www.npmjs.com/get-npm) using the command`npm install`. Depending on whether you've installed the angular command line tools on your machine globally or not, you can then compile and start the app by running `ng serve` or `npx ng serve`respectively.
 
@@ -53,6 +53,20 @@ Note that the spec file is hosted by the backend itself, and therefore only acce
 The script will then grab the new spec file and feed it, together with some accompanying configuration, into the [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). The generator is configured to use a specific  [template](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-angular.md), which will generate an angular module. This module is containing not only angular services ready to be used but also provides strongly typed interfaces for the required parameters and returned models. The aforementioned configuration can be found in a file named _`openapi-generator-config.json`_.
 
 ## Theme
+
+Modern and appealing visual design is required to satisfy user expectations. For this reason, an individual design, trimmed for efficiency and ease of use was created especially for the special features of this application. Another important requirement for the application design setup is the capability to serve as a white-label template. Further, the ability to switch between a dark and light mode should be available by default.
+
+With these various requirements in mind, let’s take a look at some implementation details of the current solution. As discussed in an earlier [section](frontend.md#feature-modules), the application is split into various feature modules, each containing one or more sub-components. Most of the custom style definitions are specific to a particular angular component. With angular's characteristic to [scope styles](https://angular.io/guide/component-styles#style-scope) to a component, we gain the advantage not to worry about any potential side effects caused by overlapping style definitions. A maintainable and scalable theming solution should ideally support the capability to influence the visual appearance of the entire application from a single point while keeping the separation of concerns between components regarding individual styling.
+
+The style property we will most likely want to change in between themes is the color palette being used. For this reason, all theme relevant color definitions inside the components are replaced by SCSS variables. With the right tools, autocompletion for SCSS variables will work, but mistakes can still be made. To make the theme system more robust access to theme colors is made through a special [mixin](https://sass-lang.com/documentation/at-rules/mixin). The mixin will then cause build-time errors when an undefined color variable is used. Each color theme is defined as a [map](https://sass-lang.com/documentation/values/maps), the keys representing the variable, and the value being the assigned color.
+
+{% hint style="warning" %}
+Always access theme colors through the **theme-var** mixin e.g.:`background-color: theme-var($--editor-background);`
+{% endhint %}
+
+Through the use of SCSS variables, a color palette for a theme can be defined globally, but there is still one crucial disadvantage. When SCSS is compiled into regular CSS, SCSS variables will be replaced by their contents and therefore become static values. Having themes with different color palettes would require separate pre-compiled CSS files. There is an elegant and easy solution, however:
+
+Instead of using SCSS variables directly, each of the SCSS variables in the theme is first defined with a unique native CSS variable as value. When compiled to CSS, the components will now contain CSS variables instead of static values. As CSS variables are evaluated in the browser at runtime, their value is dynamic.
 
 ## Monaco Editor integration
 
