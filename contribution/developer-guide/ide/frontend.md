@@ -8,7 +8,7 @@ After you've cloned the [repository](https://github.com/openvalidation/openvalid
 
 The structure of the application tries to comply with both the official recommendations in regards to [modularization](https://angular.io/guide/module-types) as well as with general best practices regarding scaling angular project architecture. The following figure displays how the general project structure is composed. Each of the areas shown will get further discussed in more detail throughout this section.
 
-![overview of general project structure](../../../.gitbook/assets/openvalidation-ide_ui-project-structure.jpg)
+![overview of general project structure](../../../.gitbook/assets/image%20%2838%29.png)
 
 ### Core Module
 
