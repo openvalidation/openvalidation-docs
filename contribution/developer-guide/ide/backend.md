@@ -116,5 +116,5 @@ The table bellow shows the environment variables which can be configured.
 
 **CORS\_HEADERS:** In order to allow Cross-Origin Resource Sharing, this environment variable can be used to configure the allowed URLs. Multiple URLs are specified comma separated one after the other \( for example: _https://sample-1.com,https://sample-2.com_\).
 
-**RESET\_SECRET:** This environment variable can be used to obfuscate the `/reset` endpoint. For this purpose, any secret is assigned here, so that this endpoint can only be accessed by additionally specifying this secret in the URL: `/reset/[key]` . If this environment variable is not set, this endpoint can be reached without specifying a secret by using `/reset`.
+**RESET\_SECRET:** This environment variable can be used to obfuscate the `/reset` endpoint. For this purpose, any secret is assigned here, so that this endpoint can only be accessed by additionally specifying this secret in the URL: `/reset/[secret]` . If this environment variable is not set, this endpoint can be reached without specifying a secret by using `/reset`.
 
